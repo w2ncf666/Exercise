@@ -1,0 +1,8 @@
+﻿  game.c
+C:\Users\wcf\source\repos\扫雷.c\扫雷.c\game.c(12,16): warning C4028: 形参 1 与声明不同
+C:\Users\wcf\source\repos\扫雷.c\扫雷.c\game.c(66,13): warning C4047: “函数”:“char *”与“char (*)[11]”的间接级别不同
+C:\Users\wcf\source\repos\扫雷.c\扫雷.c\game.c(66,9): warning C4024: “print”: 形参和实参 1 的类型不同
+C:\Users\wcf\source\repos\扫雷.c\扫雷.c\game.c(119,15): warning C4047: “函数”:“char *”与“char (*)[11]”的间接级别不同
+C:\Users\wcf\source\repos\扫雷.c\扫雷.c\game.c(119,11): warning C4024: “print”: 形参和实参 1 的类型不同
+C:\Users\wcf\source\repos\扫雷.c\扫雷.c\game.c(144,18): warning C4028: 形参 1 与声明不同
+  扫雷.c.vcxproj -> C:\Users\wcf\source\repos\扫雷.c\x64\Debug\扫雷.c.exe
