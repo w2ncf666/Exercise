@@ -346,5 +346,6 @@ int main()
 		return 0;
 	DFS(*A, 2);
 	
-	printf("≤‚ ‘");
+	
+	printf("text2");
 }
