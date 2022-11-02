@@ -1,2 +1,5 @@
 ﻿  text.c
-  数据结构.vcxproj -> C:\Users\wcf\source\repos\数据结构\x64\Debug\数据结构.exe
+D:\GitHub\Exercise\数据结构\数据结构\text.c(308,6): warning C4101: “en”: 未引用的局部变量
+D:\GitHub\Exercise\数据结构\数据结构\text.c(389,3): warning C4033: “get1”必须返回值
+D:\GitHub\Exercise\数据结构\数据结构\text.c(392): warning C4716: “get1”: 必须返回一个值
+  数据结构.vcxproj -> D:\GitHub\Exercise\数据结构\x64\Debug\数据结构.exe

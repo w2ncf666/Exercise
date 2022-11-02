@@ -164,7 +164,7 @@ ptrgraph buildG(int vn)
 	scanf_s("%d", &B->EN);
 	if (B->EN)
 	{
-		
+		memset(B->G, 0, sizeof(B->G) * sizeof(char));
 		for (int i = 0; i < B->EN; i++)
 		{
 			scanf_s("%d%d%d", &C->v1, &C->v2, &C->weight);
@@ -172,6 +172,7 @@ ptrgraph buildG(int vn)
 			B->G[C->v2][C->v1] = C->weight;
 		}
 	}
+	memset(B->D, 0, sizeof(char) * 10);
 	for (int i = 1; i <= vn; i++)
 		scanf(" %c", &B->D[i]);
 	return B;
@@ -250,6 +251,7 @@ ptrLgraph buildgraph(int en)
 	}
 
 	//如果头节点存储信息的话；
+
 	for (int j = 0; j < vn; j++)
 	{
 		scanf("%c", &Lgraph->A[j].data);
@@ -272,7 +274,7 @@ typedef struct
 	datatype data;
 	ptrN firstin, firstout;
 
-}headnode[maxn];
+}*ptrnode,headnode[maxn];
 typedef struct
 {
 	int vn, en;
@@ -283,7 +285,7 @@ cross_link initcross_link(int vex)
 	cross_link L = (cross_link)malloc(sizeof(cross_link1));
 	L->en = 0;
 	L->vn = vex;
-	for (int i = 0; i < vex; i++)
+	for (int i = 1; i <= vex; i++)
 	{
 		L->G[i].firstin = L->G[i].firstout = NULL;
 	}
@@ -301,10 +303,10 @@ insertedge2(cross_link L,ptredge2 e)
 	L->G[e->v1].firstout = new;
 	
 }
-cross_link bulidcross_link(int en)
+cross_link bulidcross_link(int vn)
 {
-	int vn;
-	scanf("%d", &vn);
+	int en;
+	//scanf("%d", &vn);
 	cross_link L = initcross_link(vn);
 	scanf("%d", &L->en);
 	if (L->en)
@@ -317,6 +319,8 @@ cross_link bulidcross_link(int en)
 		}
 		
 	}
+	for (int i = 1; i <= vn; i++)
+		scanf(" %c", &L->G[i].data);
 	return L;
 }
 int visited[maxn] = { 0 };
@@ -331,9 +335,86 @@ DFS(Graph G, int v)//深度优先遍历
 			DFS(G, w);
 	}
 }
-BFS(Graph G, int v)
+int getvex(Graph G,datatype a)
 {
-
+	int i = 0;
+	while (a != G.D[i])
+		i++;
+	return i;
+}
+int getvex2(Graph G, int v, weighttype a)
+{
+	int i = 0, j = 0;
+	while (a != G.G[v][i])
+		i++;
+	if (i == G.VN)
+		return 0;
+	j=i+1;
+	while (G.G[v][j] == 0 && j - G.VN)
+		j++;
+	if (G.G[v][j] == 0)
+		return 0;
+	else
+		return j;
+}
+BFS1(Graph G, int v)//用邻接矩阵的广度搜索遍历
+{
+	ptrLQueue Q = initLQueue();
+	EnLQueue(Q, G.D[v]);
+	visited[v] = 1;
+	int w = 0;
+	char i;
+	
+		while (!Lisempty(Q))
+		{
+			 DeLQueue(Q, &i);
+			printf("%c\n", i);
+			v=getvex(G,i);
+			for (w = 1; w <= G.VN&&w>0; w = getvex2(G, v, G.G[v][w]))
+			{
+				if (!visited[w] && G.G[v][w])
+				{
+					EnLQueue(Q, G.D[w]);
+					visited[w] = 1;
+				}	
+			}
+		}
+}
+ptrnode get1(cross_link1 G, datatype i, ptrN* p )
+{
+	int j = 0;
+	while ( i!=G.G[j].data)
+		j++;
+	if (G.G[j].firstout == NULL)
+		return;
+	else
+	*p=G.G[j].firstout;
+}
+BFS2(cross_link1 G, int v)
+{
+	char i;
+	ptrLQueue Q = initLQueue();
+	EnLQueue(Q, G.G[v].data);
+	visited[v] = 1;
+	while (!Lisempty(Q))
+	{
+		DeLQueue(Q, &i);
+		printf("%c\n", i);
+		ptrN p=NULL;
+		 get1(G, i,&p);
+		while (p != NULL)
+		{
+			if (!visited[p->headvex])
+			{
+				EnLQueue(Q, G.G[p->headvex].data);
+				visited[p->headvex] = 1;
+			}
+			p = p->tlink;
+		}
+	}
+	for (int j = 1; j <= G.vn; j++)
+		if (!visited[j])
+			BFS2(G, j);
 }
 int main()
 {
@@ -341,11 +422,13 @@ int main()
 		scanf("%c%c%c%c", &D[1],&D[2], &D[3], &D[4]);
 	
 	*/
-	ptrgraph A= buildG(4);
+	/*ptrgraph A= buildG(8);
 	if (A == NULL)
 		return 0;
-	DFS(*A, 2);
-	
-	
-	printf("text2");
+	BFS1(*A, 1);*/
+	cross_link B = bulidcross_link(4);
+	if (B == NULL)
+		return 0;
+	BFS2(*B, 2);
+
 }
