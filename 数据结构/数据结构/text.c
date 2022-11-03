@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#define maxn 10
+#define maxn 12
 typedef int weighttype;
 typedef int vertex;
 typedef char datatype;
@@ -136,7 +136,7 @@ typedef struct
 	int EN;
 	weighttype G[maxn][maxn];
 	datatype D[maxn];
-
+	edge E[maxn*(maxn-1)/2];
 }Graph, * ptrgraph;
 ptrgraph initGraph(int vertexnum)
 {
@@ -153,6 +153,10 @@ ptrgraph initGraph(int vertexnum)
 		}
 	}
 	return a;
+}
+insertE(ptrgraph G, ptredge C)
+{
+	
 }
 ptrgraph buildG(int vn)
 {
@@ -416,19 +420,150 @@ BFS2(cross_link1 G, int v)
 		if (!visited[j])
 			BFS2(G, j);
 }
+typedef struct
+{
+	int a, b;
+	weighttype weight;
+}side[maxn*(maxn-1)/2];
+Kruskal(Graph G)//克鲁斯卡尔算法
+{
+	int set[maxn]={0};
+	int num = 0;//已有边数量
+	int k;//记录位置
+	side se;//边数组
+	for (int i = 1; i <= G.VN; i++)
+		for (int j = 1 + 1; j <= G.VN; j++)
+			if (G.G[i][j] > 0) 
+			{
+				k = num;
+				while (k>0&&G.G[i][j] < se[k].weight)
+				{
+					se[k + 1] = se[k];
+					k--;
+				}
+				se[k + 1].a = i;
+				se[k + 1].b = j;
+				se[k + 1].weight = G.G[i][j];
+				num++;
+			}
+	k = 0; int i = 1; int sb;
+	for (; i <= G.VN; i++)
+		set[i] = i;
+	while (k < G.VN - 1)
+	{
+		if (set[se[i].b]!= set[se[i].a])
+		{
+			printf("%c--%c", G.D[se[i].a], G.D[se[i].b]);
+			sb = set[se[i].a];
+			for (i = 1; i <= G.VN; i++)//找set里面所有相同的集合然后都与se[i].b并在一起，因为可能有很多个，所以需要循环找，并且第一次时候
+				if (set[i] == sb)
+				{
+					set[se[i].b] = set[i];
+					break;
+				}
+			k++;
+		}
+		i++;
+	}
+}
+typedef struct
+{
+	int adjvex;
+	weighttype lowcost;
+}mincost[maxn];
+int mininum(Graph G,mincost a)
+{
+	int k = 0;
+	for (int i = 1; i <= G.VN; i++)
+		if (!a[i].lowcost)
+			k = i;
+	for (int j = k + 1; j <= G.VN; j++)
+		if (a[j].lowcost&&a[k].lowcost > a[j].lowcost)
+			k = j;
+	return k;
+}
+minispantree_prim(Graph G, int v)
+{
+	int k;
+	mincost cost;
+	for (int i = 1; i <= G.VN; i++)
+		if (i != v)
+		{
+			cost[i].adjvex = v;
+			cost[i].lowcost = G.G[v][i];
+		}
+	cost[v].lowcost = 0;
+	for (int i = 1; i < G.VN; i++)
+	{
+		k = mininum(G, cost);
+		cost[k].lowcost = 0;
+		printf("%d--%d\n", cost[k].adjvex, k);
+		for (int j = 1; j <= G.VN; i++)
+			if (G.G[k][j]<cost[i].lowcost)
+			{
+				cost[j].adjvex = k;
+				cost[j].lowcost = G.G[k][j];
+			}
+	}
+
+}
+typedef struct
+{
+	int adjex;
+	weighttype length;
+}p[maxn];
+weighttype getpath(p paths ,int VN,int *j)
+{
+	int z = 1, a = 1;
+	weighttype w = 0;	
+		while (!paths[z].length&&z<=VN)
+			z++;
+		for (a = z+1; a <= VN; a++)
+			if (!paths[a].length&&paths[a].length < paths[z].length)
+				z = a;
+	w = paths[z].length;
+	*j = z;
+}
+shortpath(Graph G, int start)
+{
+	int j = 0; int visited[10] = { 0 }; int i = 1;
+	weighttype path[maxn] = { 0 };//源点到除各点（下标）的距离，0为无法到达。已经找到的
+	p paths = { 0 };//正在找的
+	for (i = 1; i <= G.VN; i++)
+		if (G.G[start][i])
+		{
+			paths[i].length = G.G[start][i];	//找到一个，更新距离，下次再循环找最小
+			paths[i].adjex = i;
+		}
+	weighttype p=getpath(paths,G.VN,&j);
+	path[j] = p;
+	visited[j] = 1;
+	for (i = 1; i <= G.VN; i++)
+	{
+		p = getpath(paths, G.VN, &j);
+		path[j] = p;
+		visited[j] = 1;
+	
+	for (i = 1; i <= G.VN; i++)
+		if (!visited[i] && G.G[j][i] && path[i] > p + G.G[j][i])
+			path[i] = p + G.G[j][i];
+	}
+}
 int main()
 {
 	/*datatype D[10];
 		scanf("%c%c%c%c", &D[1],&D[2], &D[3], &D[4]);
 	
 	*/
-	/*ptrgraph A= buildG(8);
+	ptrgraph A= buildG(6);
 	if (A == NULL)
 		return 0;
-	BFS1(*A, 1);*/
-	cross_link B = bulidcross_link(4);
+	shortpath(*A, 1);
+	//Kruskal(*A);
+	/*BFS1(*A, 1);*/
+	/*cross_link B = bulidcross_link(4);
 	if (B == NULL)
 		return 0;
-	BFS2(*B, 2);
+	BFS2(*B, 2);*/
 
 }
