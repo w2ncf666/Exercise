@@ -3,6 +3,9 @@
 #include<string.h>
 #include<stdlib.h>
 #define maxn 12
+#define STACK_SIZE 100
+#define ADDSIZE 10
+#define LIST_SIZE 100
 typedef int weighttype;
 typedef int vertex;
 typedef char datatype;
@@ -548,6 +551,137 @@ shortpath(Graph G, int start)
 		if (!visited[i] && G.G[j][i] && path[i] > p + G.G[j][i])
 			path[i] = p + G.G[j][i];
 	}
+}
+Floyd(Graph G)//弗洛伊德算法，主要是三层for循环，每次最底层循环找插入节点后的最短路劲，然后修改
+//三层循环中最外层是插入的节点，中间层是出发节点，最内曾是目的地节点
+{
+	for (int u = 1; u <= G.VN; u++)
+		for (int v = 1; v <= G.VN; v++)
+			for (int w = 1; w <= G.VN; w++)
+				if (G.G[v][u] + G.G[u][w] < G.G[v][w])//还要预先判断v-u和u-w是否有路径
+					;//更新最小路径v-w为v-u-w;
+				//多个节点也没事，因为最外层的for（u）会一一尝试每个节点。
+}
+typedef struct
+{
+	int* base, * top;
+	int stacksize;
+	int nowsize;
+}sqstack;
+initstack(sqstack* S)
+{
+	S->base = (int *)malloc(sizeof(int) * STACK_SIZE);
+	S->base = S->top;
+	S->nowsize = STACK_SIZE;
+}
+int stackfull(const sqstack* s)
+{
+	if (s->top - s->base == s->nowsize)
+		return 1;
+	else
+		return 0;
+}
+int stackempty(const sqstack* s)
+{
+	if (s->top - s->base == s->base)
+		return 1;
+	else
+		return 0;
+}
+pushstack(sqstack* s, int d)
+{
+	if (stackfull)
+	{
+		s->base = (int*)realloc(s->base, (s->nowsize + ADDSIZE * sizeof(int)));//都要判断是否分配失败，上面初始化也是一样
+		s->nowsize += ADDSIZE;
+}
+	*s->top = d;
+	s->top++;
+	s->nowsize++;
+}
+popstack(sqstack* s, int* d)
+{
+	if (stackempty)
+		return;
+	s->top--;
+	*d = *s->top;
+}
+destroystack(sqstack* s)
+{
+	free(s->base);
+	s->base = s->top = NULL;
+	s->nowsize = 0;
+}
+clearstack(sqstack* s)
+{
+	s->top = s->base;
+	s->nowsize = 0;
+}
+findindegree(Lgraph G, int indegree[])
+{
+	int i = 1;
+	Node p;
+	for (i = 1; i <= G.vn; i++)
+		indegree[i] = 0;
+	for (i = 1; i <= G.vn; i++)
+	{
+		p = G.A[i].firstnode;
+		while (p)
+		{
+			indegree[i]++;//其实是p指向的节点的下一个节点，当初设计不好
+			p++;
+		}
+	}
+}
+toplogicalsort(Lgraph G)
+{
+	//初始化栈，然后求各个顶点的入度，入栈同时减去1入度数，如果有新入度为0，再入栈。
+	//逐个打印出出栈的序号，作为拓扑排序。
+	//如果有回路（即完成的拓扑排序的顶点数少于原始数目），提示非拓扑序列
+	/*关键路径问题即在拓扑排序基础上加一个拓扑栈和最早和最晚时间*/
+}
+typedef struct
+{
+	int* a;
+	int sizeused;
+	int sizemax;
+}list;
+initList(list* L)
+{
+	L->a = (int*)malloc(sizeof(int) * LIST_SIZE);
+	if (!L->a)
+		return
+		L->sizeused = 0;
+	L->sizemax = LIST_SIZE;
+}Listinsert(list* L, int i, int data)
+{
+	if (i<1 || i>L->sizeused+1)//位置非法
+		return;
+	if (L->sizeused >= L->sizemax)
+	{
+		L->a = realloc(L->a, sizeof(int) * ADDSIZE + L->sizemax);
+		L->sizemax += ADDSIZE;
+	}
+	int* q = L->a + i - 1;
+	for (int* p = L->a + L->sizeused - 1; p >= q; p--)
+		*(p + 1) = *p;
+	*q = data;
+	L->sizeused++;
+	/*数组表示：
+	int q=i-1;
+	for()
+	p=sizeused-1+1
+	a[p+1]=a[p];
+	a[q]=data;*/
+ }
+Listdel(list* L, int i, int* data)
+{
+	if (i<1 || i>L->sizeused)//位置非法
+		return;
+	int* p = L->a + i - 1;
+	for (; p<= L->sizeused-1; p++)
+		*p = *(p+1);
+	L->sizeused--;
 }
 int main()
 {
