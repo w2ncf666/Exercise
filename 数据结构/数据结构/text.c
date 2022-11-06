@@ -683,6 +683,111 @@ Listdel(list* L, int i, int* data)
 		*p = *(p+1);
 	L->sizeused--;
 }
+typedef struct poly
+{
+	float coef;//系数
+	int expon;//指数
+	struct poly* next;
+}poly;
+attatch(float coef,int expon,poly** C)
+{
+	poly* temp = (poly*)malloc(sizeof(poly));
+	temp->coef = coef;
+	temp->expon = expon;
+	temp->next = ( * C)->next;
+	(*C)->next = temp;
+	*C = temp;
+	
+	
+}
+poly* polygather(const poly* A,const poly* B)//用链式存储结构存储一元多项式并合并
+{
+	poly*rear = (poly*)malloc(sizeof(poly));
+	rear->next = NULL;
+	rear->coef = rear->expon = 0;
+	poly* front = rear;
+	while (A && B)
+	{
+		if (A->expon < B->expon) 
+		{
+			attatch(A->coef, A->expon,&rear);
+			A = A->next;
+		}
+		else if (A->expon > B->expon)
+		{
+			attatch(B->coef, B->expon, &rear);
+			B = B->next;
+		}
+		else
+		{
+			attatch(A->coef + B->coef, A->expon + B->expon, &rear);
+			A = A->next; B = B->next;
+		}
+		while (A)
+		{
+			attatch(A->coef, A->expon, &rear);
+			A = A->next;
+		}
+		while (B)
+		{
+			attatch(B->coef, B->expon, &rear);
+			B = B->next;
+		}	
+	}
+	poly* temp = front;
+	front = front->next;
+	free(temp);
+	return front;
+}
+poly* polymutiply(poly* a, poly* b)//一元多项式的相乘
+{
+	poly* rear = (poly*)malloc(sizeof(poly));
+	rear->next = NULL;
+	rear->coef = rear->expon = 0;
+	while (a)
+	{
+		poly* temp= (poly*)malloc(sizeof(poly)); 
+		poly* front = temp;
+		while (b)
+		{
+			attatch(a->coef * b->coef, a->expon + b->expon, &temp);
+			b = b->next;
+		}
+		a = a->next;
+		rear=polygather(rear, front);
+		free(front);
+		temp = front = NULL;
+	}
+	return rear;
+}
+checkmarry()
+{
+	sqstack* q=(sqstack*)malloc(sizeof(sqstack));
+	initstack(q);
+	char ch[80],*p;
+	printf("请输入验证的括号\n");
+	gets(ch);
+	p = ch;
+	int d;
+	while (p)
+	{
+		switch (*p)
+		{
+		case'(':
+		case'{':
+		case'[':pushstack(q,*p);
+			p++;
+			break;
+		case')':
+		case'}':
+		case']':if(stackempty)
+			popstack(q, &d);
+			//if()判断是否匹配括号匹配就++并且break；不匹配就return
+			//栈空的话也是不匹配
+		default:p++;
+		}
+	}
+}
 int main()
 {
 	/*datatype D[10];

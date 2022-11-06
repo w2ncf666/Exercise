@@ -15,8 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="text.c">
+    <Image Include="text.c">
       <Filter>源文件</Filter>
-    </ClCompile>
+    </Image>
   </ItemGroup>
 </Project>
