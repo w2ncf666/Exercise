@@ -788,21 +788,40 @@ checkmarry()
 		}
 	}
 }
+void move(char a, int n, char z)
+{
+	static int c = 0;
+	printf("第%d步，把%d号盘从%c搬到%c\n", ++c, n, a, z);
+}
+void hanoi(int n, char x, char y, char z)
+{
+	if (n == 1)
+		move(x, n, z);
+	else
+	{
+		hanoi(n - 1, x, z, y);
+		move(x, n, z);
+		hanoi(n - 1, y, x, z);
+	}
+}
 int main()
 {
 	/*datatype D[10];
 		scanf("%c%c%c%c", &D[1],&D[2], &D[3], &D[4]);
 
 	*/
-	ptrgraph A = buildG(6);
+	/*ptrgraph A = buildG(6);
 	if (A == NULL)
 		return 0;
-	shortpath(*A, 1);
+	shortpath(*A, 1);*/
 	//Kruskal(*A);
 	/*BFS1(*A, 1);*/
 	/*cross_link B = bulidcross_link(4);
 	if (B == NULL)
 		return 0;
 	BFS2(*B, 2);*/
-
+	int n = 0;
+	printf("3个塔分别为a，b，c，从a搬到c，输入盘数：");
+	scanf("%d", &n);
+	hanoi(n, 'a', 'b','c');
 }
