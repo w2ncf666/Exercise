@@ -804,6 +804,77 @@ void hanoi(int n, char x, char y, char z)
 		hanoi(n - 1, y, x, z);
 	}
 }
+//二叉树顺序链表即为数组表示
+typedef struct BiTNode
+{
+	datatype data;
+	struct BiTNode* lchild, * rchild;
+}*BiTree,BiTNode;//二叉树的二叉链表存储
+typedef struct TriTNode
+{
+	datatype data;
+	struct TriTNode* lchild, * rchild;
+	struct TriTNode* parent;
+}*TriTree,TriTNode;//三叉链表
+preOrdertraverse(BiTree t)//先序遍历二叉树
+{
+	if (t)
+	{
+		printf("%c", t->data);
+		preOrdertraverse(t->lchild);
+		preOrdertraverse(t->rchild);
+	}
+}
+//中中序遍历和后序遍历只是中间的顺序不同，即访问根节点的时机不同，每次都是经过三次，但分别是第一第二第三次访问。
+int BiTreeDepth(BiTree t)
+{
+	int i, j;
+	if (!t)
+		return 0;
+	i = BiTreeDepth(t->lchild);
+	j = BiTreeDepth(t->rchild);
+	return i > j ? i+1 : j+1;//递归算法，求左右子树的层数赋值给i和j，然后再加1；
+}
+BiTNode* CreatBiTNode(datatype data, BiTNode* lchild, BiTNode* rchild)
+{//用于后序遍历二叉树来复制，也可以用来构造新建二叉树
+	BiTNode* new = (BiTNode*)malloc(sizeof(BiTNode));
+	if (!new)
+		return NULL;
+	new->data = data;
+	new->lchild = lchild;
+	new->rchild = rchild;
+	return new;
+}
+BiTree CopyBiTree2(BiTree t)//后序遍历二叉树复制
+{
+	BiTNode* lchild, * rchild;
+	if (!t)
+		return NULL;
+	lchild = CopyBiTree2(t->lchild);
+	rchild = CopyBiTree2(t->rchild);
+	BiTNode* node = (BiTNode*)malloc(sizeof(BiTNode));
+	node = CreatBiTNode(t->data, lchild, rchild);
+	return node;
+}
+BiTree CopyBiTree(BiTree t)//先序递归复制二叉树
+{
+	if (!t)
+		return NULL;
+	BiTNode* node = (BiTNode*)malloc(sizeof(BiTNode));
+	if (!node)
+		return NULL;
+	node->data = t->data;
+	node->lchild = CopyBiTree(t->lchild);
+	node->rchild = CopyBiTree(t->rchild);
+	return node;
+}
+typedef enum{Link,Thread}PointerTag;//枚举类型
+typedef struct BiThrNode//线索二叉树
+{
+	datatype data;
+	struct BiThrNode* lchild, *rchild;
+	PointerTag ltag, rtag;
+}BiThrnode,*BiThrTree;
 int main()
 {
 	/*datatype D[10];
