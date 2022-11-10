@@ -874,7 +874,160 @@ typedef struct BiThrNode//线索二叉树
 	datatype data;
 	struct BiThrNode* lchild, *rchild;
 	PointerTag ltag, rtag;
-}BiThrnode,*BiThrTree;
+}BiThrNode,*BiThrTree;
+BiThrNode* pre;
+Inthreading(BiThrTree p)
+{
+	if (!p)
+	{
+		Inthreading(p->lchild);
+		if (!p->lchild)
+		{
+			p->ltag = Link;
+			p->rchild = pre;
+		}
+		if (!pre->rchild)
+		{
+			pre->rchild = Link;
+			pre->rchild = p;
+		}
+		pre = p;
+		Inthreading(p->rchild);
+	}
+}
+InOrderThreading(BiThrTree t)
+{
+	BiThrNode* node = (BiThrNode*)malloc(sizeof(BiThrNode));
+	if (node)
+		return;
+	node->ltag = Link;
+	node->lchild = t;
+	node->rtag = Thread;
+	node->rchild = node;
+	if (!t)
+	{
+		node->ltag = Thread;
+		node->lchild = node;
+		return;
+	}
+	pre = node;
+	Inthreading(t);
+	node->rchild->rchild = pre;
+	pre->rchild = node;
+	pre->rchild = Link;
+}
+Inordertraverse(BiThrTree t)//t已经是带头节点的，头节点的左孩子是孩子域，指向第一个结点，t的最后一个节点的右孩子指向后继，即为头结点，
+                           //t的中序遍历的第一个结点的左孩子域指向头结点，是前驱指针域
+{
+	BiThrNode* h = t->lchild;
+	while (h != t)
+	{
+		while (h->ltag == Link)
+			h = h->lchild;
+		printf("%c", h->data);
+		while (h->rtag == Thread&&h->rchild!=t)
+		{
+			h = h->rchild;
+			printf("%c", h->data);
+		}
+		h = h->rchild;
+	}
+}
+typedef struct ptnode
+{
+	datatype data;
+	int parent;
+}ptnode;
+typedef struct
+{
+	ptnode a[100];
+	int root, count;
+}ptree;//双亲表示法
+typedef struct cdnode
+{
+	int child;
+	struct cdnode* d;
+}cdnode;
+typedef struct
+{
+	datatype data;//还可加上双亲的位置，以此表示孩子双亲表示法、
+	cdnode* firstchild;
+}cdbox;
+typedef struct
+{
+	cdbox d[100];
+	int count, root;
+}cdtree;//孩子表示法
+typedef struct brcdnode
+{
+	datatype data;
+	struct brcdnode* firstchild, * nextbr;
+}brcdnode;//孩子兄弟表示法
+typedef struct
+{
+	unsigned int weight;
+	unsigned int parent, lchild, rchild;
+}HTNode,*HuffmanTree;
+typedef char** HuffmanCode;
+int min2(HuffmanTree t, int i)
+{
+	int j, flag;
+	int min = t[1].weight;
+	for (j = 1; j <= i; j++)
+		if (!t[j].parent && t[j].weight < min)
+		{
+			min = t[j].weight;
+			flag = j;
+		}
+	t[flag].parent = 1;
+}
+select(HuffmanTree t, int i,int* s1, int* s2)
+{
+	s1 = min2(t, i);
+	s2 = min2(t, i);
+}
+creatHuffnan(HuffmanTree t,int n,weighttype weight[],HuffmanCode code)//建哈夫曼树,并且求出各个字符的哈夫曼编码
+{//n个叶子结点对应n个待编码的字符。
+	int m,i,j,f,s1,s2;
+	if (n <= 1)
+		return;
+	m = 2 * n - 1;
+	t = (HuffmanTree*)malloc(sizeof(HTNode) * (m + 1));
+	if (!t)
+		return;
+	for (i = 1; i <= n; i++)
+	{
+		t[i].weight = weight[i - 1];
+		t[i].lchild = 0;
+		t[i].rchild = 0;
+		t[i].parent = 0;
+	}
+	for (i = n + 1; i <= m; i++)
+	{
+		select(t,i-1, &s1, &s2);
+		t[i].lchild = s1;
+		t[i].rchild = s2;
+		t[s1].parent = t[s2].parent = i;
+		t[i].weight = t[s1].weight + t[s2].weight;
+	}
+	code = (HuffmanCode)malloc(sizeof(char*) * (n + 1));//分配n+1个数组存放各个字符的哈夫曼编码字符串的首地址，其本质相当于二位数组。
+	char* cd = (char*)malloc(sizeof(char) * n);
+	cd[n - 1] = '\0';
+	for (i = 1; i <= n; i++)
+	{
+		int start = n - 1;
+		for (j = i, f = t[j].parent; f != 0; f = t[f].parent)
+			if (t[f].lchild ==f )
+				cd[--start] = '0';
+			else
+				cd[--start] = '1';
+		code[i] = (char*)malloc(sizeof(char) * (n - start));
+		strcpy(code[i], &cd[start]);
+	}
+	free(cd);
+	cd = NULL;
+}
+
 int main()
 {
 	/*datatype D[10];

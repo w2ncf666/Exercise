@@ -9,7 +9,16 @@ D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(682,29): war
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(707,27): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(746,27): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(769,6): warning C4013: “gets”未定义；假设外部返回 int
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(902,3): warning C4033: “InOrderThreading”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(911,3): warning C4033: “InOrderThreading”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(977,35): warning C4018: “<”: 有符号/无符号不匹配
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(986,17): warning C4047: “=”:“int *”与“int”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(987,17): warning C4047: “=”:“int *”与“int”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(993,3): warning C4033: “creatHuffnan”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(995,52): warning C4047: “=”:“HuffmanTree”与“HuffmanTree *”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(997,3): warning C4033: “creatHuffnan”必须返回值
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(399): warning C4716: “get1”: 必须返回一个值
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(529): warning C4716: “getpath”: 必须返回一个值
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(656): warning C4715: “initList”: 不是所有的控件路径都返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(983): warning C4716: “min2”: 必须返回一个值
   数据结构2.vcxproj -> D:\GitHub\Exercise\数据结构2\数据结构2\x64\Debug\数据结构2.exe
