@@ -1027,7 +1027,103 @@ creatHuffnan(HuffmanTree t,int n,weighttype weight[],HuffmanCode code)//建哈夫曼
 	free(cd);
 	cd = NULL;
 }
+typedef struct
+{
+	datatype* data;
+	int length;
+}sstable;
+int search1(sstable* s,datatype key)//带哨兵的顺序查找
+{
+	int i;
+	s->data[0] = key;//哨兵
+	for (i = s->length; s->data[i] == key; i--);
+	return i;//当i=0时候是找不到，表示查找失败。当i！=0时候是key在data的下标。
+}
+int search2(sstable* s, datatype key)//折半查找（二分查找）。
+{
+	int left = 1, right = s->length, mid;
+	while (left <= right)
+	{
+		mid = (left + right) / 2;
+		if (key = s->data[mid])
+			return mid;
+		else if (key > s->data[mid])
+			left = mid + 1;
+		else
+			right = mid - 1;
+	}
+	return 0;//查找失败
+}
+typedef struct BSTNode//二叉排序树的存储
+{
+	datatype data;
+	struct BSTNode* lchild, * rchild;
+}BSTNode,*BSTree;
+BSTNode* searchBST(BSTree t, datatype key)//二叉排序树的查找。
+{
+	if (!t || key == t->data)
+		return t;
+	else if (key > t->data)
+		return searchBST(t->rchild, key);
+	else
+		return searchBST(t->lchild, key);
+}
+BSTNode* searchBST2(BSTree t, datatype key,BSTNode*f)//配合二叉排序树的查找并插入操作
+{
+	if (!t)//找到叶子结点，并返回地址
+		return f;
+	else if (key == t->data)//原来二叉排序树上已经有待插入的结点，返回空指针
+		return NULL;
+	else if (key > t->data)
+		return searchBST2(t->rchild, key,t);
+	else
+		return searchBST2(t->lchild, key,t);
+}
+BSTree InsertBST(BSTree t, datatype data)//二叉排序树的查找并插入操作
+{
+	BSTNode* p = searchBST2(t, data, NULL);
+	if (!p)//如果原来二叉排序树上已经有待插入的结点，p是空指针，直接返回t（1）
+		return t;
+	else//原来二叉排序树没有待插入的结点（1）
+	{
+		BSTNode* s = (BSTNode*)malloc(sizeof(BSTNode));//生成待插入的结点
+		if (!s)
+			return NULL;
+		s->data = data;
+		s->lchild = s->rchild = NULL;
+		if (!t)//树空就直接插在根结点（2）
+			t = s;
+		else//树非空（2）
+		{
+			if (data > p->data)//插入的数据在右子树上
+				p->rchild = s;
+			else//插入的数据在左子树上
+				p->lchild = s;
+		}
+		return t;
+	}
+}
+delete(BSTree* t, datatype data)
+{
+	if (!(*t)->lchild)
+	{
+		*t = (*t)->rchild;
 
+	}
+	else if (!(*t)->rchild)
+		*t = (*t)->lchild;
+	else
+	{
+
+	}
+}
+BSTree DeleteBST(BSTree t, datatype data)
+{
+	if (!t)
+		return NULL;
+	if (data == t->data)
+		delete(&t, data);
+}
 int main()
 {
 	/*datatype D[10];

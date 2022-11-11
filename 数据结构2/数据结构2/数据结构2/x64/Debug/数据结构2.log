@@ -21,4 +21,5 @@ D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(399): warnin
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(529): warning C4716: “getpath”: 必须返回一个值
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(656): warning C4715: “initList”: 不是所有的控件路径都返回值
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(983): warning C4716: “min2”: 必须返回一个值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1126): warning C4715: “DeleteBST”: 不是所有的控件路径都返回值
   数据结构2.vcxproj -> D:\GitHub\Exercise\数据结构2\数据结构2\x64\Debug\数据结构2.exe
