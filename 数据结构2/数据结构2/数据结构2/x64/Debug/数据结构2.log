@@ -17,9 +17,12 @@ D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(987,17): war
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(993,3): warning C4033: “creatHuffnan”必须返回值
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(995,52): warning C4047: “=”:“HuffmanTree”与“HuffmanTree *”的间接级别不同
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(997,3): warning C4033: “creatHuffnan”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1147,23): warning C4047: “函数”:“BSTree”与“BSTNode **”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1147,13): warning C4024: “DeleteBST”: 形参和实参 1 的类型不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1149,23): warning C4047: “函数”:“BSTree”与“BSTNode **”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1149,13): warning C4024: “DeleteBST”: 形参和实参 1 的类型不同
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(399): warning C4716: “get1”: 必须返回一个值
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(529): warning C4716: “getpath”: 必须返回一个值
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(656): warning C4715: “initList”: 不是所有的控件路径都返回值
 D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(983): warning C4716: “min2”: 必须返回一个值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1126): warning C4715: “DeleteBST”: 不是所有的控件路径都返回值
   数据结构2.vcxproj -> D:\GitHub\Exercise\数据结构2\数据结构2\x64\Debug\数据结构2.exe

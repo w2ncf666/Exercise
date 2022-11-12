@@ -1103,26 +1103,51 @@ BSTree InsertBST(BSTree t, datatype data)//二叉排序树的查找并插入操作
 		return t;
 	}
 }
-delete(BSTree* t, datatype data)
-{
+delete(BSTree* t, datatype data)//删除后仍然可能导致原平衡二叉树失衡，需要重新调整
+{//作用是删除结点并且尝试平衡二叉树
+	BSTNode* p = *t, * s;
 	if (!(*t)->lchild)
 	{
 		*t = (*t)->rchild;
-
+		free(p);
 	}
 	else if (!(*t)->rchild)
-		*t = (*t)->lchild;
-	else
 	{
-
+		*t = (*t)->lchild;
+		free(p);
 	}
+	else//找待删除结点的前驱
+	{
+		s = (*t)->lchild;
+		while (s->rchild)
+			s = s->rchild;
+		p->data = s->data;
+		if (s->lchild)
+			s = s->lchild;
+		free(s);	
+	}
+	/*找待删除结点的后继
+	else
+	s = (*t)->rchild;
+		while (s->lchild)
+			s = s->lchild;
+		p->data = s->data;
+		if (s->rchild)
+			s = s->rchild;
+		free(s);
+	*/
 }
-BSTree DeleteBST(BSTree t, datatype data)
+BSTree DeleteBST(BSTree t, datatype data)//作用是定位到删除的结点
 {
 	if (!t)
 		return NULL;
 	if (data == t->data)
 		delete(&t, data);
+	else if (data > t->data)
+		DeleteBST(&t->rchild, data);
+	else
+		DeleteBST(&t->lchild, data);
+	return t;
 }
 int main()
 {
