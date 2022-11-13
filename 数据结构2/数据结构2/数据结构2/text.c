@@ -1149,6 +1149,129 @@ BSTree DeleteBST(BSTree t, datatype data)//作用是定位到删除的结点
 		DeleteBST(&t->lchild, data);
 	return t;
 }
+InsertSort(int arr[],int length)//直接插入排序带哨兵
+{
+	int i,j;
+	for (i = 2; i <= length; i++)
+	{
+		if (arr[i] > arr[i - 1])
+			continue;
+		arr[0] = arr[i];
+		j = i - 1;
+		while (arr[0] < arr[j])
+		{
+			arr[j + 1] = arr[j];
+			j--;
+		}
+		arr[j + 1] = arr[0];
+	}
+}
+BInsertSort(int arr[], int length)//折半插入排序
+{
+	int i, j,low,high,mid;
+	for (i = 2; i <= length; i++)
+	{
+		arr[0] = arr[i];
+		low = 1;
+		high = i - 1;
+		while (low <= high)
+		{
+			mid = (low + high) / 2;
+			if (arr[0] >= arr[mid])
+				low = mid + 1;
+			else
+				high = mid - 1;
+		}
+		for (j = i - 1; j >= high + 1; j--)
+			arr[j + 1] = arr[j];
+		arr[j + 1] = arr[0];
+	}
+}
+ShellInsertSort(int arr[],int length, int dk[], int t)//希尔排序
+{
+	int i, j,k;
+	for (i = 0; i < t; i++)
+	{
+		for (j = 1 + dk[i]; j <= length; j++)
+		{
+			if (arr[j] > arr[j - dk[i]])
+				continue;
+			arr[0] = arr[j];
+			k = j;
+			for (k -= dk[i]; k > 0 && arr[0] < arr[k]; k -= dk[i])
+				arr[k + dk[i]] = arr[k];
+			arr[k + dk[i]] = arr[0];
+		}
+		for (int i = 1; i <= length; i++)
+			printf("%d ", arr[i]);
+		printf("\n");
+	}
+}
+bubble_sort(int arr[], int length)//
+{
+	int temp,flag=1;
+	for (int i = 0; i < length - 1&&flag; i++)
+	{
+		flag = 0;
+		for (int j = 1; j <= length - 1 - i; j++)
+			if (arr[j] > arr[j + 1])
+			{
+				temp = arr[j];
+				arr[j] = arr[j + 1]; arr[j + 1] = temp;
+				flag = 1;
+			}
+	}
+}
+int Partition(int arr[], int low, int high)
+{
+	arr[0] = arr[low];
+	while (low < high)
+	{
+		while (arr[high] >= arr[0] && low < high)
+			high--;
+		arr[low] = arr[high];
+		while (arr[low] <= arr[0] && low < high)
+			low++;
+		arr[high] = arr[low];
+	}
+	arr[high] = arr[0];
+	return high;
+}
+my_qsort(int arr[], int start, int end)//快速排序递归算法
+{
+	if (start < end)
+	{
+		int pivotloc = Partition(arr, start, end);
+		my_qsort(arr, start, pivotloc - 1);
+		my_qsort(arr, pivotloc + 1, end);
+	}
+}
+int getmin(int arr[],int start,int length)
+{
+	int j,k=start;
+	int min = arr[start];
+	for (j = start + 1; j <= length; j++)
+		if (arr[j] < min)
+		{
+			min = arr[j];
+			k = j;
+		}
+	return k;
+}
+selectsort(int arr[], int length)//是交换位置，不能直接覆盖，因为要在原来的线性存储结构中继续找最小值
+{
+	int min,temp;
+	for (int i = 1; i <= length; i++)
+	{
+		min = getmin(arr, i, length);
+		if (min != i)
+		{
+			temp = arr[min];
+			arr[min] = arr[i];
+			arr[i] = temp;
+		}
+	}
+}
 int main()
 {
 	/*datatype D[10];
@@ -1165,8 +1288,15 @@ int main()
 	if (B == NULL)
 		return 0;
 	BFS2(*B, 2);*/
-	int n = 0;
+	/*int n = 0;
 	printf("3个塔分别为a，b，c，从a搬到c，输入盘数：");
 	scanf("%d", &n);
-	hanoi(n, 'a', 'b','c');
+	hanoi(n, 'a', 'b','c');*/
+	int arr[9] = { 0,45,52,16,38,96,27,03,64 };
+	//int arr[4] = { 0,96,64,52 };
+	int dk[3] = { 4,2,1 };
+	selectsort(arr,8);
+	for (int i = 1; i <= 8; i++)
+		printf("%d ", arr[i]);
+	return 0;
 }

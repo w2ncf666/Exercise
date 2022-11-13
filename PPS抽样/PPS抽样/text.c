@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 #include<stdlib.h>
+#include<Windows.h>
 typedef struct
 {
 	int* stunum;
@@ -26,14 +27,17 @@ getp_chos(student** s)
 			return 0;
 	}
 	int r;
+	float g;
 	printf("请输入不为0随机数<=%f\n", ( * s)->distance);
 	scanf("%d",&r);
 	(*s)->chos[0] = (int)((*s)->stunum[0] - r) / (*s)->distance + 1;
 	(*s)->p[0] = (*s)->chos[0] / (float)(*s)->chosenum;
+	g = (*s)->chos[0] * (*s)->distance + r - (*s)->stunum[0];
 	for (int i = 1; i < (*s)->schoolnum; i++)
 	{
-		(*s)->chos[i] = (int)((*s)->stunum[i]-(((*s)->chos[i - 1] - 1)* (*s)->distance + r + (*s)->distance) + (*s)->stunum[i-1])/(*s)->distance+1;
+		(*s)->chos[i] = (int)((*s)->stunum[i] - g)/(*s)->distance+1;
 		(*s)->p[i] = (*s)->chos[i] / (float)(*s)->chosenum;
+		g = g + (float)((*s)->chos[i] * (*s)->distance - (*s)->stunum[i]);
 	}
 	return 0;
 }
@@ -71,6 +75,7 @@ int main()
 	free(s->p);
 	free(s->stunum);
 	free(s);
+	system("pause");
 	return 0;
 	/*int s1, s2, s3, s4, s5, s6, s7, s8, s9, s10;
 	printf("请分别输入高校总数、学生总数、抽样数和随机数\n");
