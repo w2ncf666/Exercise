@@ -1207,7 +1207,7 @@ ShellInsertSort(int arr[],int length, int dk[], int t)//Ï£¶ûÅÅĞò
 		printf("\n");
 	}
 }
-bubble_sort(int arr[], int length)//
+bubble_sort(int arr[], int length)//Ã°ÅİÅÅĞò
 {
 	int temp,flag=1;
 	for (int i = 0; i < length - 1&&flag; i++)
@@ -1222,7 +1222,7 @@ bubble_sort(int arr[], int length)//
 			}
 	}
 }
-int Partition(int arr[], int low, int high)
+int Partition(int arr[], int low, int high)//ÕÒÖáĞÄ
 {
 	arr[0] = arr[low];
 	while (low < high)
@@ -1272,6 +1272,60 @@ selectsort(int arr[], int length)//ÊÇ½»»»Î»ÖÃ£¬²»ÄÜÖ±½Ó¸²¸Ç£¬ÒòÎªÒªÔÚÔ­À´µÄÏßĞÔ´
 		}
 	}
 }
+heapadjust(int arr[], int start, int end,int length)//¶Ñµ÷Õû
+{
+	int j;
+	arr[0] = arr[start];
+	for(j=start*2;j<=length;j*=2)
+	{
+		if (j<length &&arr[j] > arr[j + 1])
+			j++;
+		if (arr[0] < arr[j])
+			break;
+		arr[start] = arr[j];//²»±ØÔÚ´Ë½øĞĞÌæ»»²Ù×÷£¬ÒòÎªÒ»°ãÓÃµ½¶ÑÅÅĞòµÄÅÅĞòÔªËØ¶¼ÊÇºÜ´óÊıÁ¿µÄ£¬´ËÊ±½øĞĞÌæ»»»ØÀË·Ñ´óÁ¿Ê±¼äºÍ¿Õ¼ä
+		start = j;            //ÓÃstart¼Ç×¡jµÄÎ»ÖÃ¾Í¿ÉÒÔÁË£¬Ïàµ±ÓÚÒ»Ö±°Ñº¢×Ó½ÚµãÍùÉÏÅ²£¬Èç¹û´Ë´¦·ÅÖÃarr[start]¿ÉÒÔĞÎ³É´ó£¨Ğ¡£©¸ù¶Ñ
+	}
+	arr[start] = arr[0];//ÔòÔÚ´Ë½«arr[0]µÄÖµ¸³ÉÏ¼´¿É¡£
+}
+heapsort(int arr[],int length)//¶ÑÅÅĞò     Èç¹û½¨Á¢µÄÊÇĞ¡¸ù¶Ñ¾Í»á¼ÆËã³ö½µĞòÅÅĞò¡£Èç¹û´ó¸ù¶Ñ¾ÍÊÇÉıĞòÅÅĞò
+{
+	int i;
+	for (i = length / 2; i > 0; i--)//´ÓÒ¶×Ó½áµãµÄ¸¸½áµã¿ªÊ¼½¨Á¢³õÊ¼¶Ñ
+		heapadjust(arr, i, length,length);
+	for (i = length; i > 1; i--)
+	{
+		arr[0] = arr[1];
+		arr[1] = arr[i];
+		arr[i] = arr[0];
+		heapadjust(arr, 1, i - 1, i - 1);
+	}
+}
+Merge(int source[], int dest[], int i, int m, int n)
+{
+	int k,l;
+	for (k = i, l = m + 1; i <= m && l <= n; i++)
+		if (source[i] <= source[l])
+			dest[k++] = source[i];
+		else
+			dest[k++] = source[l];
+	while (i <= m)
+		dest[k++] = source[i++];
+	while (l <= n)
+		dest[k++] = source[l++];
+}
+Msort(int random[], int sorted[],int start,int end)
+{
+	if (start == end)
+		sorted[start] = random[start];
+	else
+	{
+		int temp[100] = { 0 };
+		int mid = (start + end) / 2;
+		Msort(random, temp, start, mid);
+		Msort(random, temp, mid + 1, end);
+		Merge(temp, sorted, start, mid, end);
+	}
+}
 int main()
 {
 	/*datatype D[10];
@@ -1292,11 +1346,15 @@ int main()
 	printf("3¸öËş·Ö±ğÎªa£¬b£¬c£¬´Óa°áµ½c£¬ÊäÈëÅÌÊı£º");
 	scanf("%d", &n);
 	hanoi(n, 'a', 'b','c');*/
-	int arr[9] = { 0,45,52,16,38,96,27,03,64 };
-	//int arr[4] = { 0,96,64,52 };
-	int dk[3] = { 4,2,1 };
-	selectsort(arr,8);
-	for (int i = 1; i <= 8; i++)
-		printf("%d ", arr[i]);
+	int arr[5] = { 0,5,7,2,3, };
+	int srr[5]={0};
+	//int arr[10] = { 0,2,5,3,10,7,6,3,5,8 };
+	//int dk[10] = { 0 };
+	Msort(arr,srr,1,4);
+	//int a[5] = { 0,6,8,2,3};
+	//int b[5];
+	//Merge(arr, dk, 1, 2,4);
+	for (int i = 1; i <= 4; i++)
+		printf("%d ",srr[i]);
 	return 0;
 }
