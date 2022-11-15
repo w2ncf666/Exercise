@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include<math.h>
 #define maxn 12
 #define STACK_SIZE 100
 #define ADDSIZE 10
@@ -21,6 +22,8 @@ typedef struct//Ñ­»·¶ÓÁÐ
 Queue initqueue(int max)
 {
 	Queue A = (Queue)malloc(sizeof(Qnode));
+	if (!A)
+		return NULL;
 	A->data = (datatype*)malloc(max * sizeof(datatype*));
 	A->front = A->rear = 0;
 	A->maxsize = max;
@@ -145,6 +148,8 @@ ptrgraph initGraph(int vertexnum)
 {
 	vertex v, w;
 	ptrgraph a = (ptrgraph)malloc(sizeof(Graph));
+	if (!a)
+		return NULL;
 	a->EN = 0;
 	a->VN = vertexnum;
 	//¼ÇµÃÒªÅÐ¶Ïa¿ÕÖ¸Õë
@@ -165,13 +170,15 @@ ptrgraph buildG(int vn)
 {
 	ptrgraph B;
 	ptredge C = (ptredge)malloc(sizeof(edge));
+	if (!C)
+		return NULL;
 	//¼ÇµÃÒªÅÐ¶ÏC¿ÕÖ¸Õë
 	//scanf_s("%d", &vn);
 	B = initGraph(vn);
 	scanf_s("%d", &B->EN);
 	if (B->EN)
 	{
-		memset(B->G, 0, sizeof(B->G) * sizeof(char));
+		memset(B->G, 0, sizeof(B->G));
 		for (int i = 0; i < B->EN; i++)
 		{
 			scanf_s("%d%d%d", &C->v1, &C->v2, &C->weight);
@@ -220,6 +227,8 @@ typedef struct
 ptrLgraph  initLgraph(int vn)
 {
 	ptrLgraph a = (ptrLgraph)malloc(sizeof(Lgraph));
+	if (!a)
+		return;
 	a->vn = vn;
 	a->en = 0;
 	for (int i = 0; i < vn; i++)
@@ -229,6 +238,8 @@ ptrLgraph  initLgraph(int vn)
 insertedge(ptrLgraph Lgraph, ptredge1 a)
 {
 	Node new = (Node)malloc(sizeof(edge1));
+	if (!new)
+		return;
 	new->adjvex = a->v2;
 	new->weight = a->weight;
 	new->nextarc = Lgraph->A[a->v1].firstnode;
@@ -252,6 +263,8 @@ ptrLgraph buildgraph(int en)
 	if (en)
 	{
 		ptredge1 E = (ptredge1)malloc(sizeof(edge1));
+		if (!E)
+			return NULL;
 		for (int i = 0; i < en; i++)
 			scanf_s("%d%d%d", &E->v1, &E->v2, &E->weight);
 		insertedge(Lgraph, E);
@@ -290,6 +303,8 @@ typedef struct
 cross_link initcross_link(int vex)
 {
 	cross_link L = (cross_link)malloc(sizeof(cross_link1));
+	if (!L)
+		return NULL;
 	L->en = 0;
 	L->vn = vex;
 	for (int i = 1; i <= vex; i++)
@@ -301,6 +316,8 @@ cross_link initcross_link(int vex)
 insertedge2(cross_link L, ptredge2 e)
 {
 	ptrN new = (ptrN)malloc(sizeof(cross_node));
+	if (!new)
+		return NULL;
 	new->headvex = e->v2;
 	new->tailvex = e->v1;
 	new->weight = e->weight;
@@ -312,13 +329,14 @@ insertedge2(cross_link L, ptredge2 e)
 }
 cross_link bulidcross_link(int vn)
 {
-	int en;
 	//scanf("%d", &vn);
 	cross_link L = initcross_link(vn);
 	scanf("%d", &L->en);
 	if (L->en)
 	{
 		ptredge2 E2 = (ptredge2)malloc(sizeof(edge2));
+		if (!E2)
+			return NULL;
 		for (int j = 0; j < L->en; j++)
 		{
 			scanf("%d%d%d", &E2->v1, &E2->v2, &E2->weight);
@@ -393,7 +411,7 @@ ptrnode get1(cross_link1 G, datatype i, ptrN* p)
 	while (i != G.G[j].data)
 		j++;
 	if (G.G[j].firstout == NULL)
-		return;
+		return NULL;
 	else
 		*p = G.G[j].firstout;
 }
@@ -433,7 +451,7 @@ Kruskal(Graph G)//¿ËÂ³Ë¹¿¨¶ûËã·¨
 	int set[maxn] = { 0 };
 	int num = 0;//ÒÑÓÐ±ßÊýÁ¿
 	int k;//¼ÇÂ¼Î»ÖÃ
-	side se;//±ßÊý×é
+	side se={0};//±ßÊý×é
 	for (int i = 1; i <= G.VN; i++)
 		for (int j = 1 + 1; j <= G.VN; j++)
 			if (G.G[i][j] > 0)
@@ -488,7 +506,7 @@ int mininum(Graph G, mincost a)
 minispantree_prim(Graph G, int v)
 {
 	int k;
-	mincost cost;
+	mincost cost={0};
 	for (int i = 1; i <= G.VN; i++)
 		if (i != v)
 		{
@@ -529,7 +547,7 @@ weighttype getpath(p paths, int VN, int* j)
 }
 shortpath(Graph G, int start)
 {
-	int j = 0; int visited[10] = { 0 }; int i = 1;
+	int j = 0; int visited2[10] = { 0 }; int i = 1;
 	weighttype path[maxn] = { 0 };//Ô´µãµ½³ý¸÷µã£¨ÏÂ±ê£©µÄ¾àÀë£¬0ÎªÎÞ·¨µ½´ï¡£ÒÑ¾­ÕÒµ½µÄ
 	p paths = { 0 };//ÕýÔÚÕÒµÄ
 	for (i = 1; i <= G.VN; i++)
@@ -540,15 +558,15 @@ shortpath(Graph G, int start)
 		}
 	weighttype p = getpath(paths, G.VN, &j);
 	path[j] = p;
-	visited[j] = 1;
+	visited2[j] = 1;
 	for (i = 1; i <= G.VN; i++)
 	{
 		p = getpath(paths, G.VN, &j);
 		path[j] = p;
-		visited[j] = 1;
+		visited2[j] = 1;
 
 		for (i = 1; i <= G.VN; i++)
-			if (!visited[i] && G.G[j][i] && path[i] > p + G.G[j][i])
+			if (!visited2[i] && G.G[j][i] && path[i] > p + G.G[j][i])
 				path[i] = p + G.G[j][i];
 	}
 }
@@ -583,7 +601,7 @@ int stackfull(const sqstack* s)
 }
 int stackempty(const sqstack* s)
 {
-	if (s->top - s->base == s->base)
+	if (s->top==s->base)
 		return 1;
 	else
 		return 0;
@@ -592,7 +610,11 @@ pushstack(sqstack* s, int d)
 {
 	if (stackfull)
 	{
-		s->base = (int*)realloc(s->base, (s->nowsize + ADDSIZE * sizeof(int)));//¶¼ÒªÅÐ¶ÏÊÇ·ñ·ÖÅäÊ§°Ü£¬ÉÏÃæ³õÊ¼»¯Ò²ÊÇÒ»Ñù
+		sqstack*p = (int*)realloc(s->base, (s->nowsize + ADDSIZE * sizeof(int)));//¶¼ÒªÅÐ¶ÏÊÇ·ñ·ÖÅäÊ§°Ü£¬ÉÏÃæ³õÊ¼»¯Ò²ÊÇÒ»Ñù
+		if (!p)
+			return 0;
+		s->base = p;
+			return NULL;
 		s->nowsize += ADDSIZE;
 	}
 	*s->top = d;
@@ -659,7 +681,10 @@ initList(list* L)
 		return;
 	if (L->sizeused >= L->sizemax)
 	{
-		L->a = realloc(L->a, sizeof(int) * ADDSIZE + L->sizemax);
+		list*p = realloc(L->a, sizeof(int) * ADDSIZE + L->sizemax);
+		if (!p)
+			return NULL;
+		L->a = p;
 		L->sizemax += ADDSIZE;
 	}
 	int* q = L->a + i - 1;
@@ -692,6 +717,8 @@ typedef struct poly
 attatch(float coef, int expon, poly** C)
 {
 	poly* temp = (poly*)malloc(sizeof(poly));
+	if (!temp)
+		return NULL;
 	temp->coef = coef;
 	temp->expon = expon;
 	temp->next = (*C)->next;
@@ -703,6 +730,8 @@ attatch(float coef, int expon, poly** C)
 poly* polygather(const poly* A, const poly* B)//ÓÃÁ´Ê½´æ´¢½á¹¹´æ´¢Ò»Ôª¶àÏîÊ½²¢ºÏ²¢
 {
 	poly* rear = (poly*)malloc(sizeof(poly));
+	if (!rear)
+		return NULL;
 	rear->next = NULL;
 	rear->coef = rear->expon = 0;
 	poly* front = rear;
@@ -742,6 +771,8 @@ poly* polygather(const poly* A, const poly* B)//ÓÃÁ´Ê½´æ´¢½á¹¹´æ´¢Ò»Ôª¶àÏîÊ½²¢ºÏ
 poly* polymutiply(poly* a, poly* b)//Ò»Ôª¶àÏîÊ½µÄÏà³Ë
 {
 	poly* rear = (poly*)malloc(sizeof(poly));
+	if (!rear)
+		return NULL;
 	rear->next = NULL;
 	rear->coef = rear->expon = 0;
 	while (a)
@@ -764,10 +795,10 @@ checkmarry()
 {
 	sqstack* q = (sqstack*)malloc(sizeof(sqstack));
 	initstack(q);
-	char ch[80], * p;
+	char ch[80];
 	printf("ÇëÊäÈëÑéÖ¤µÄÀ¨ºÅ\n");
-	gets(ch);
-	p = ch;
+	fgets(ch,80,stdin);
+	char*p = ch;
 	int d;
 	while (p)
 	{
@@ -878,7 +909,7 @@ typedef struct BiThrNode//ÏßË÷¶þ²æÊ÷
 BiThrNode* pre;
 Inthreading(BiThrTree p)
 {
-	if (!p)
+	if (p)
 	{
 		Inthreading(p->lchild);
 		if (!p->lchild)
@@ -898,7 +929,7 @@ Inthreading(BiThrTree p)
 InOrderThreading(BiThrTree t)
 {
 	BiThrNode* node = (BiThrNode*)malloc(sizeof(BiThrNode));
-	if (node)
+	if (!node)
 		return;
 	node->ltag = Link;
 	node->lchild = t;
@@ -971,7 +1002,7 @@ typedef struct
 typedef char** HuffmanCode;
 int min2(HuffmanTree t, int i)
 {
-	int j, flag;
+	int j, flag=0;
 	int min = t[1].weight;
 	for (j = 1; j <= i; j++)
 		if (!t[j].parent && t[j].weight < min)
@@ -1011,7 +1042,11 @@ creatHuffnan(HuffmanTree t,int n,weighttype weight[],HuffmanCode code)//½¨¹þ·òÂü
 		t[i].weight = t[s1].weight + t[s2].weight;
 	}
 	code = (HuffmanCode)malloc(sizeof(char*) * (n + 1));//·ÖÅän+1¸öÊý×é´æ·Å¸÷¸ö×Ö·ûµÄ¹þ·òÂü±àÂë×Ö·û´®µÄÊ×µØÖ·£¬Æä±¾ÖÊÏàµ±ÓÚ¶þÎ»Êý×é¡£
+	if (!code)
+		return NULL;
 	char* cd = (char*)malloc(sizeof(char) * n);
+	if (!cd)
+		return NULL;
 	cd[n - 1] = '\0';
 	for (i = 1; i <= n; i++)
 	{
@@ -1202,8 +1237,8 @@ ShellInsertSort(int arr[],int length, int dk[], int t)//Ï£¶ûÅÅÐò
 				arr[k + dk[i]] = arr[k];
 			arr[k + dk[i]] = arr[0];
 		}
-		for (int i = 1; i <= length; i++)
-			printf("%d ", arr[i]);
+		for (int l = 1; l <= length; l++)
+			printf("%d ", arr[l]);
 		printf("\n");
 	}
 }
@@ -1303,17 +1338,17 @@ heapsort(int arr[],int length)//¶ÑÅÅÐò     Èç¹û½¨Á¢µÄÊÇÐ¡¸ù¶Ñ¾Í»á¼ÆËã³ö½µÐòÅÅÐò¡
 Merge(int source[], int dest[], int i, int m, int n)
 {
 	int k,l;
-	for (k = i, l = m + 1; i <= m && l <= n; i++)
+	for (k = i, l = m + 1; i <= m && l <= n; k++)
 		if (source[i] <= source[l])
-			dest[k++] = source[i];
+			dest[k] = source[i++];
 		else
-			dest[k++] = source[l];
+			dest[k] = source[l++];
 	while (i <= m)
 		dest[k++] = source[i++];
 	while (l <= n)
 		dest[k++] = source[l++];
 }
-Msort(int random[], int sorted[],int start,int end)
+Msort(int random[], int sorted[],int start,int end)//¹é²¢ÅÅÐò
 {
 	if (start == end)
 		sorted[start] = random[start];
@@ -1324,6 +1359,87 @@ Msort(int random[], int sorted[],int start,int end)
 		Msort(random, temp, start, mid);
 		Msort(random, temp, mid + 1, end);
 		Merge(temp, sorted, start, mid, end);
+	}
+}
+typedef struct SLCell
+{
+	int data;
+	struct SLCell* next;
+}SLCell;
+typedef struct
+{
+	SLCell a[10];
+	SLCell* ptr[10][2];
+}bucket;
+initbucket(bucket*b)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		b->a[i].data = 0;
+		b->a[i].next = NULL;
+		b->ptr[i][0] = b->ptr[i][1] = &b->a[i];
+	}
+}
+getnum(int a)
+{
+	int num=0;
+	while (a)
+	{
+		a /= 10;
+		num++;
+	}
+	return num;
+}
+ord(int arr, bucket* b, int j)
+{
+	int k = 1;
+	while (--j)
+		k *= 10;
+	SLCell* new = (SLCell*)malloc(sizeof(SLCell));
+	if (!new)
+		return;
+	if (j == 1)
+	{
+		new->data = arr;
+		new->next = b->ptr[arr % 10][1]->next;
+		b->ptr[arr % 10][1]->next = new;
+		b->ptr[arr % 10][1] = new;
+	}
+	else
+	{
+		new->data = arr;
+		new->next = b->ptr[arr / k % 10][1]->next;
+		b->ptr[arr / k % 10][1]->next = new;
+		b->ptr[arr / k % 10][1] = new;
+	}
+	
+}
+output(bucket* b, int arr[],int length)
+{
+	int i,j=1;
+	SLCell* p,*q;
+	for ( i = 0; i < 10&&j<=length; i++)
+		if (p = b->a[i].next)
+			while (p)
+			{
+				q = p;
+				arr[j++] = p->data;
+				p = p->next;
+				free(q);
+			}
+}
+radixsort(int arr[], int length)//»ùÊýÅÅÐò
+{
+	int num=0,i,j=1;
+	bucket* b = (bucket*)malloc(sizeof(bucket));
+	initbucket(b);
+	num=getnum(arr[1]);
+	for (;j<=num; j++)
+	{
+		for (i = 1; i <= length; i++)
+			ord(arr[i], b, j);
+		output(b, arr, length);
+		initbucket(b);
 	}
 }
 int main()
@@ -1346,15 +1462,18 @@ int main()
 	printf("3¸öËþ·Ö±ðÎªa£¬b£¬c£¬´Óa°áµ½c£¬ÊäÈëÅÌÊý£º");
 	scanf("%d", &n);
 	hanoi(n, 'a', 'b','c');*/
-	int arr[5] = { 0,5,7,2,3, };
-	int srr[5]={0};
+	int arr[10] = { 0,254,365,214,286,456,685,632,145,354 };
+	//int srr[9]={0};
 	//int arr[10] = { 0,2,5,3,10,7,6,3,5,8 };
 	//int dk[10] = { 0 };
-	Msort(arr,srr,1,4);
+	radixsort(arr,9);
 	//int a[5] = { 0,6,8,2,3};
 	//int b[5];
 	//Merge(arr, dk, 1, 2,4);
-	for (int i = 1; i <= 4; i++)
-		printf("%d ",srr[i]);
+	for (int i = 1; i <= 9; i++)
+		printf("%d ",arr[i]);
+	/*int a = 333;
+	int b=getnum(a);
+	printf("%d", b);*/
 	return 0;
 }

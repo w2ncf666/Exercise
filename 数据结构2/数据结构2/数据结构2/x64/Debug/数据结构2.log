@@ -1,28 +1,42 @@
 ﻿  text.c
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(315,6): warning C4101: “en”: 未引用的局部变量
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(396,3): warning C4033: “get1”必须返回值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(586,33): warning C4047: “==”:“__int64”与“int *const ”的间接级别不同
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(605,3): warning C4033: “popstack”必须返回值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(659,3): warning C4033: “Listinsert”必须返回值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(680,3): warning C4033: “Listdel”必须返回值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(682,29): warning C4047: “<=”:“int *”与“int”的间接级别不同
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(707,27): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(746,27): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(769,6): warning C4013: “gets”未定义；假设外部返回 int
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(902,3): warning C4033: “InOrderThreading”必须返回值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(911,3): warning C4033: “InOrderThreading”必须返回值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(977,35): warning C4018: “<”: 有符号/无符号不匹配
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(986,17): warning C4047: “=”:“int *”与“int”的间接级别不同
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(987,17): warning C4047: “=”:“int *”与“int”的间接级别不同
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(993,3): warning C4033: “creatHuffnan”必须返回值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(995,52): warning C4047: “=”:“HuffmanTree”与“HuffmanTree *”的间接级别不同
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(997,3): warning C4033: “creatHuffnan”必须返回值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1147,23): warning C4047: “函数”:“BSTree”与“BSTNode **”的间接级别不同
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1147,13): warning C4024: “DeleteBST”: 形参和实参 1 的类型不同
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1149,23): warning C4047: “函数”:“BSTree”与“BSTNode **”的间接级别不同
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1149,13): warning C4024: “DeleteBST”: 形参和实参 1 的类型不同
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(399): warning C4716: “get1”: 必须返回一个值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(529): warning C4716: “getpath”: 必须返回一个值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(656): warning C4715: “initList”: 不是所有的控件路径都返回值
-D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(983): warning C4716: “min2”: 必须返回一个值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(231,3): warning C4033: “initLgraph”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(242,3): warning C4033: “insertedge”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(320,14): warning C4047: “return”:“int”与“void *”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(616,14): warning C4133: “=”: 从“sqstack *”到“int *”的类型不兼容
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(617,15): warning C4047: “return”:“int”与“void *”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(613,1): warning C4133: “初始化”: 从“int *”到“sqstack *”的类型不兼容
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(627,3): warning C4033: “popstack”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(681,3): warning C4033: “Listinsert”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(686,15): warning C4047: “return”:“int”与“void *”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(687,11): warning C4133: “=”: 从“list *”到“int *”的类型不兼容
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(705,3): warning C4033: “Listdel”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(707,29): warning C4047: “<=”:“int *”与“int”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(721,14): warning C4047: “return”:“int”与“void *”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(736,27): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(777,27): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(933,3): warning C4033: “InOrderThreading”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(942,3): warning C4033: “InOrderThreading”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1008,35): warning C4018: “<”: 有符号/无符号不匹配
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1017,17): warning C4047: “=”:“int *”与“int”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1018,17): warning C4047: “=”:“int *”与“int”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1024,3): warning C4033: “creatHuffnan”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1026,52): warning C4047: “=”:“HuffmanTree”与“HuffmanTree *”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1028,3): warning C4033: “creatHuffnan”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1046,14): warning C4047: “return”:“int”与“void *”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1049,14): warning C4047: “return”:“int”与“void *”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1182,23): warning C4047: “函数”:“BSTree”与“BSTNode **”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1182,13): warning C4024: “DeleteBST”: 形参和实参 1 的类型不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1184,23): warning C4047: “函数”:“BSTree”与“BSTNode **”的间接级别不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1184,13): warning C4024: “DeleteBST”: 形参和实参 1 的类型不同
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1400,3): warning C4033: “ord”必须返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(237): warning C4715: “initLgraph”: 不是所有的控件路径都返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(329): warning C4715: “insertedge2”: 不是所有的控件路径都返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(417): warning C4715: “get1”: 不是所有的控件路径都返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(547): warning C4716: “getpath”: 必须返回一个值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(623): warning C4715: “pushstack”: 不是所有的控件路径都返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(678): warning C4715: “initList”: 不是所有的控件路径都返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(701): warning C4715: “Listinsert”: 不是所有的控件路径都返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(729): warning C4715: “attatch”: 不是所有的控件路径都返回值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1014): warning C4716: “min2”: 必须返回一个值
+D:\GitHub\Exercise\数据结构2\数据结构2\数据结构2\text.c(1064): warning C4715: “creatHuffnan”: 不是所有的控件路径都返回值
   数据结构2.vcxproj -> D:\GitHub\Exercise\数据结构2\数据结构2\x64\Debug\数据结构2.exe
