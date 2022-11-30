@@ -29,7 +29,7 @@ public class pickUpName {
         }
         int time=10;
         ArrayList<String> temp=new ArrayList<>();
-        temp.stream().map()
+
         for (int i = 0; i < time; i++) {
             System.out.println("第"+(i+1)+"次-----------------------------");
             for (int j = 0; j < b; j++) {
