@@ -31,11 +31,11 @@ public abstract class Animal {
     public Animal(String name, int age) {
         this.name = name;
         this.age = age;
-        System.out.println(1);
+        System.out.println("1带参");
     }
 
     public Animal() {
-        System.out.println("看我?");
+        System.out.println("无参看我?");
     }
 
     public abstract void eat();

@@ -30,7 +30,12 @@ public class lihua extends cat{
     }
 
     public lihua(String name, int age) {
-       super(name, age);
-       System.out.println(555);
+        super(name, age);
+        System.out.println(555);
    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"加一个";
+    }
 }
