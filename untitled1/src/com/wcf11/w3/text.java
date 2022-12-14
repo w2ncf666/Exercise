@@ -24,32 +24,44 @@ public class text {
         //
         //​	在该方法内部调用打电话,发短信以及新手机特有的玩游戏方法
         phone p1=new newPhone();
-        usephone(p1);
+       // usephone(p1);
         System.out.println("---------------------");
         phone p2=new oldPhone();
-        usephone(p2);
+        //usephone(p2);
         Iplay.method();
         System.out.println("---------------------");
-        Iplay i=new Iplay() {
-            @Override
-            public void playgame() {
-                System.out.println("我");
-            }
-        };
-        ( (newPhone) p1).text(i);//匿名内部类
+//        Iplay i=new Iplay() {
+//            @Override
+//            public void playgame() {
+//                System.out.println("我");
+//            }
+//        };
+//        ( (newPhone) p1).text(i);//匿名内部类
+//        ( (newPhone) p1).text(()-> System.out.println("wo"));
         /*    ( (newPhone) p1).text(new Iplay() {
             @Override
             public void playgame() {
                 System.out.println("我");
             }
         });*/
+        //i.playgame();
+        String i2="123544";
+        int i3=i2.compareTo("123");
+        System.out.println(i3);
+        usephone(new phone() {
+            @Override
+            public void print() {
+                System.out.println("狗吃骨头");
+            }
+        }, (n,m)->n+m);
     }
-    public static void usephone(phone p){
-        p.call();
-        p.sendmessage();
-        if(p instanceof newPhone)
-            ((newPhone) p).playgame();
-         else if (p instanceof oldPhone)
-            ((oldPhone) p).playgame();
+    public static void usephone(phone p,Iplay i){
+        p.print();
+       int n=5,m=6;
+        System.out.println(i.sum(n, m));
+//        if(p instanceof newPhone)
+//            ((newPhone) p).playgame();
+//         else if (p instanceof oldPhone)
+//            ((oldPhone) p).playgame();
     }
 }
