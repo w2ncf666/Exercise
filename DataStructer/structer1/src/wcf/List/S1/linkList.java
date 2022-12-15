@@ -1,4 +1,4 @@
-package wcf.S1;
+package wcf.List.S1;
 
 import java.util.Scanner;
 
@@ -52,7 +52,7 @@ public class linkList implements listMethod {
     }
 
     @Override
-    public void display() {
+    public void display() throws Exception {
         singleNode p = head.next;
         while (p != null) {
             System.out.print(p.data + " ");

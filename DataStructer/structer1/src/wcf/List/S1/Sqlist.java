@@ -1,4 +1,4 @@
-package wcf.S1;
+package wcf.List.S1;
 
 public class Sqlist implements listMethod {
     private Object[] listElem;//数组
@@ -15,7 +15,7 @@ public class Sqlist implements listMethod {
 
     @Override
     public void insert(int i, Object x) throws Exception {
-        if (i < 0 || i > listElem.length)
+        if (i < 0 || i > currentLength())
             throw new Exception("插入位置非法");
         if (current == listElem.length)
             throw new Exception("顺序表已满");
@@ -27,9 +27,9 @@ public class Sqlist implements listMethod {
     }
 
     @Override
-    public void display() {//展示,遍历线性表
+    public void display() throws Exception {//展示,遍历线性表
         for (int i = 0; i < current; i++)
-            System.out.println(listElem[i] + " ");
+            System.out.print(listElem[i] + " ");
         System.out.println();
     }
 
@@ -67,5 +67,24 @@ public class Sqlist implements listMethod {
         if (i < 0 || i > current - 1)
             throw new Exception("线性表索引非法!");
         return listElem[i];
+    }
+    public void reverse() throws Exception {
+        int from=0,to=currentLength()-1;
+        while (from<to){
+            Object temp=get(from);
+            listElem[from]=listElem[to];
+            listElem[to]=temp;
+            from++;
+            to--;
+        }
+    }
+    public void moveSome(int n) throws Exception {
+        if(n<0)
+            throw new Exception("移动的位数错误");
+        Object []temp=new Object[currentLength()];
+        for (int i = 0; i < currentLength(); i++) {
+            temp[(i+n)%currentLength()]=listElem[i];
+        }
+        listElem=temp;
     }
 }

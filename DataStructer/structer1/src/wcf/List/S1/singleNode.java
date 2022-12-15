@@ -1,4 +1,4 @@
-package wcf.S1;
+package wcf.List.S1;
 
 public class singleNode{
     public Object data;
