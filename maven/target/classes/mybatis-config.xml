@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <!--name属性的值是实体类所在包--><!--别名默认就是接口名,不区分大小写-->
+        <package name="com.wcf.pojo"/>
+    </typeAliases>
+    <environments default="development"><!--可以配置多环境,以环境ID选择-->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///db1?useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="1234"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--加载sql映射文件-->
+<!--        <mapper resource="com/wcf/mapper/textmapper.xml"/>-->
+<!-- 如果Mapper接口名称和SQL映射文件名称相同，并在同一目录下，则可以使用包扫描的方式简化SQL映射文件的加载。
+也就是将核心配置文件的加载映射配置文件的配置修改为  -->
+        <package name="com.wcf.mapper"/>
+        <!--<mapper resource="com/wcf/mapper/textmapper.xml"/>-->
+    </mappers>
+</configuration>

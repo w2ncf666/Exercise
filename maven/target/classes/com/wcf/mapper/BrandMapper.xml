@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wcf.mapper.BrandMapper">
+    <!--<select id="selectAll" resultType="brand">
+        select id, brand_name brandName, company_name companyName, ordered, description, status
+        from tb_brand;
+    </select>-->   <!--也可以用起别名的方式 也就是as来用.-->
+    <!--<sql id="brand_column">/*sql片段*/
+        id, brand_name as brandName, company_name as companyName, ordered, description, status
+    </sql>
+    <select id="selectAll" resultType="brand">
+        select
+            <include refid="brand_column"/>
+        from tb_brand;
+    </select>-->
+    <resultMap id="brandResultMap" type="brand"><!--  brand是resultmap映射的类型-->
+        <!--
+            id：完成主键字段的映射
+                column：表的列名
+                property：实体类的属性名
+            result：完成一般字段的映射
+                column：表的列名
+                property：实体类的属性名
+        -->
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_brand (brand_name, company_name, ordered, description, status)
+        values (#{brandName}, #{companyName}, #{ordered}, #{description}, #{status});
+    </insert>
+    <!--<update id="update">
+        <set>
+            <if test="brandName != null and brandName != ''">
+                brand_name = #{brandName},
+            </if>
+            <if test="companyName != null and companyName != ''">
+                company_name= #{companyName};
+            </if>
+            <if test="ordered != null">
+                ordered= #{ordered};
+            </if>
+            <if test="description != null and description != ''">
+                description= #{description};
+            </if>
+            <if test="status != null">
+                status= #{status};
+            </if>
+        </set>
+where id=#{id};
+    </update>-->
+
+    <update id="update">
+        update tb_brand
+        <set>/*set标签也是动态调整语句. if标签可以在没输入的情况不置为null*/
+            <if test="brandName != null and brandName != ''">
+                brand_name = #{brandName},
+            </if>
+            <if test="companyName != null and companyName != ''">
+                company_name = #{companyName},
+            </if>
+            <if test="ordered != null">
+                ordered = #{ordered},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete
+        from tb_brand
+        where id = #{id};
+    </delete>
+    <delete id="deleteByIds">
+        delete
+        from tb_brand
+        where id in (<foreach collection="ids" item="id" separator=",">/*foreach还有open 和 close属性,用于开始和结束符号,类似于string
+                                                                        Joiner,便可以省去in的()*/
+        #{id}
+    </foreach>) ;
+    </delete>
+
+   <!-- <select id="selectAll" resultMap="brandResultMap">
+        select *
+        from tb_brand;
+    </select>   可以用注解开发,简单语句用注解更方便,但是复杂的语句还是写配置文件好-->
+    <select id="selectByid" resultMap="brandResultMap">
+        select *
+        from tb_brand
+        where id = #{id}
+    </select>
+    <!-- <select id="selectByCondition" resultMap="brandResultMap">
+         select *
+         from tb_brand
+         <where>
+             <if test="status!=null">
+                 status = #{status}
+             </if>
+             <if test="companyName!=null">
+                 company_name = #{companyName}
+             </if>
+             <if test="brandName!=null">
+                 brand_name = #{brandName}
+             </if>
+         </where>
+     </select>-->
+    <select id="selectByCondition" resultMap="brandResultMap">
+        select *
+        from tb_brand
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="companyName != null and companyName != '' ">
+                and company_name like #{companyName}
+            </if>
+            <if test="brandName != null and brandName != '' ">
+                and brand_name like #{brandName}
+            </if>
+        </where>
+    </select>
+    <select id="selectByConditionSingle" resultMap="brandResultMap">
+        select *
+        from tb_brand
+        <where>
+            <choose>
+                <when test="status != null">
+                    status=#{status}
+                </when>
+                <when test="companyName !=null and companyName !=''">
+                    company_name like #{companyName}
+                </when>
+                <when test="brandName !=null and brandName !=''">
+                    brand_name like #{brandName}
+                </when>
+            </choose>
+        </where>
+        /*where标签帮助动态处理语句,用普通where需要在<!--<choose>-->中加otherwise*/
+    </select>
+    <!-- <select id="selectByCondition" resultMap="brandResultMap">
+         select *
+         from tb_brand
+         where status = #{status}
+           and company_name like #{companyName}
+           and brand_name like #{brandName}
+     </select>-->
+    <!--<select id="selectByCondition" resultMap="brandResultMap">
+        select *
+        from tb_brand
+        where
+        <if test="status != null">
+            status = #{status}
+        </if>
+        <if test="companyName != null and companyName != '' ">
+            and company_name like #{companyName}
+        </if>
+        <if test="brandName != null and brandName != '' ">
+            and brand_name like #{brandName}
+        </if>
+    </select>-->
+</mapper>
