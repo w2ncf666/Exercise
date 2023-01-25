@@ -5,6 +5,8 @@ public class text {
                 System.out.println("不要抽烟");
             }
         });
+        String s="234";
+        System.out.println(s.split("3")[0]);
     }
     public static void smoke(smoking s){
         s.smoke();

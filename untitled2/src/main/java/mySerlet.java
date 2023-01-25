@@ -2,7 +2,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 @WebServlet(urlPatterns = "/demo1",loadOnStartup = 1)
-public class mySerlet implements Servlet {
+public class mySerlet extends Servlet {
     private ServletConfig servletConfig;
     public void init(ServletConfig servletConfig) throws ServletException {
         System.out.println("666666");//只会初始化一次

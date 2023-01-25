@@ -6,7 +6,7 @@ import java.io.IOException;
 
 
 @WebServlet("/demo5")
-public class note implements Servlet {
+public class note extends Servlet {
 
     public void init(ServletConfig config) throws ServletException {
 

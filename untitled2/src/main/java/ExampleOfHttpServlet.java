@@ -7,7 +7,7 @@ import java.io.IOException;
 *HttpServlet接口继承自Servlet接口
 * 相当于当前ExampleOfHttpServlet 继承自Servlet接口
 * */
-public class ExampleOfHttpServlet implements Servlet {
+public class ExampleOfHttpServlet extends Servlet {
     public void init(ServletConfig config) throws ServletException {
 
     }
