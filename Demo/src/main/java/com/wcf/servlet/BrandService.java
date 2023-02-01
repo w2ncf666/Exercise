@@ -72,10 +72,9 @@ public class BrandService extends BaseServlet {
             brandName = "%" + brandName + "%";
             brand.setBrandName(brandName);
         }*/
-
         /*调用service*/
         List<Brand> brands = service.selectByPageAndCondition((current - 1) * size, size, brand);
-        int totalCount = service.selectTotalCount();
+        Integer totalCount = service.selectTotalCount(brand);
 
         /*封装成page*/
         Page<Brand> page = new Page();

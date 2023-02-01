@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [31/Jan/2023:23:58:51 +0800] "GET /Demo HTTP/1.1" 302 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [31/Jan/2023:23:58:51 +0800] "GET /Demo/ HTTP/1.1" 200 57 http-bio-8080-exec-3 26
+0:0:0:0:0:0:0:1 - - [31/Jan/2023:23:58:51 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [31/Jan/2023:23:58:55 +0800] "GET /Demo/brand.html HTTP/1.1" 304 - http-bio-8080-exec-5 12
+0:0:0:0:0:0:0:1 - - [31/Jan/2023:23:58:56 +0800] "POST /Demo/brand/selectByPageAndCondition?currentPage=1&size=14 HTTP/1.1" 200 2160 http-bio-8080-exec-6 463

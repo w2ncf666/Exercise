@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>他是傻逼</title>
+    <script src="js/vue.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+</head>
+<body>
+<div id="app">
+<h3>添加品牌</h3>
+<form action="/kuangJiaModle/addservlet" method="post">
+    品牌名称：<input name="brandName" v-model="brand.brandName"><br>
+    企业名称：<input name="companyName" v-model="brand.companyName"><br>
+    排序：<input name="ordered" v-model="brand.ordered"><br>
+    描述信息：<textarea rows="5" cols="20" name="description" v-model="brand.description"></textarea><br>
+    状态：
+    <input type="radio" name="status" v-model="brand.status" value="0">禁用
+    <input type="radio" name="status" v-model="brand.status" value="1">启用<br>
+
+    <!--<input type="button" id="btn"  value="提交" v-on:click="show()">-->
+    <input type="button" id="btn" @click="show()" value="提交">
+</form>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return {
+                brand:{}
+            }
+        },
+        methods:{
+            show(){
+                // 发送ajax请求，添加
+                alert("2222")
+                var _this = this;
+                axios({
+                    method:"post",
+                    url:"http://localhost:8080/kuangJiaModle/addservlet",
+                    data:_this.brand
+                }).then(function (resp) {
+                    // 判断响应数据是否为 success
+                    if(resp.data == "success"){
+                        location.href = "http://localhost:8080/kuangJiaModle/selectAllServlet";
+                    }
+                })
+            }
+        }
+    })
+</script>
+</html>

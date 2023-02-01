@@ -1,0 +1,12 @@
+com\wcf\pojo\Address.class
+com\wcf\config\SpringMvcSupport.class
+com\wcf\config\SpringMvcConfig.class
+com\wcf\service\impl\userServiceImpl.class
+com\wcf\service\userService.class
+com\wcf\config\ServletContainersInitConfig.class
+com\wcf\controller\bookController.class
+com\wcf\pojo\book.class
+com\wcf\controller\UserController.class
+com\wcf\config\SpringConfig.class
+com\wcf\pojo\User.class
+com\wcf\dao\userDao.class

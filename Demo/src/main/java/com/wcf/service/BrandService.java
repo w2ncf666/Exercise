@@ -23,7 +23,7 @@ public interface BrandService {
 
     List<Brand>selectAllLimit(int begin,int end);
 */
-    int selectTotalCount();
+    Integer selectTotalCount(Brand brand);
 
 
     List<Brand> selectByPageAndCondition(int begin,int end,Brand brand);

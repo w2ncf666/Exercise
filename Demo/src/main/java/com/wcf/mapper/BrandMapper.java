@@ -50,8 +50,7 @@ public interface BrandMapper {
     List<Brand>selectAllLimit(@Param("begin") int begin,@Param("end")int end);
 
 
-    @Select("select count(*) from tb_brand ;")
-    int selectTotalCount();
+    Integer selectTotalCount(Brand brand);
 
 
     List<Brand> selectByPageAndCondition(@Param("begin")int begin,@Param("end")int end,@Param("brand")Brand brand);

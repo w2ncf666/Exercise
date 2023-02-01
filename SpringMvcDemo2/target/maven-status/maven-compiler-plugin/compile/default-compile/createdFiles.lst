@@ -1,0 +1,4 @@
+com\wcf\pojo\SystemException.class
+com\wcf\pojo\Result.class
+com\wcf\pojo\Code.class
+com\wcf\pojo\ProjectExceptionAdvice.class

@@ -1,0 +1,10 @@
+com\wcf\util\SqlSessionFactoryUtils.class
+com\wcf\servlet\BrandService.class
+com\wcf\pojo\Page.class
+com\wcf\service\BrandServiceImpl.class
+com\wcf\servlet\BaseServlet.class
+com\wcf\pojo\Brand.class
+com\wcf\service\BrandService.class
+com\wcf\servlet\text\brand.class
+com\wcf\mapper\BrandMapper.class
+com\wcf\servlet\text\ff.class

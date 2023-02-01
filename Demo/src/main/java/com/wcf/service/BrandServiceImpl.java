@@ -131,14 +131,14 @@ public class BrandServiceImpl implements BrandService {
     }*/
 
     @Override
-    public int selectTotalCount() {
+    public Integer selectTotalCount(Brand brand) {
         //2. 获取SqlSession对象
         SqlSession sqlSession = factory.openSession();
         //3. 获取BrandMapper
         BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
 
         //4. 调用方法
-        int count = mapper.selectTotalCount();
+        Integer count = mapper.selectTotalCount(brand);
         // sqlSession.commit();
         //5. 释放资源
         sqlSession.close();

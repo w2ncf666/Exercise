@@ -13,7 +13,7 @@
 
         <el-form-item label="当前状态">
             <el-select v-model="brand3.statusStr" placeholder="当前状态">
-                <el-option label="任意" value="null"></el-option>
+                <el-option label="任意" value="任意"></el-option>
                 <el-option label="启用" value="启用"></el-option>
                 <el-option label="禁用" value="禁用"></el-option>
             </el-select>
@@ -342,6 +342,8 @@
                     this.brand3.status=1;
                 else if(this.brand3.statusStr=="禁用")
                     this.brand3.status=0;
+                else if(this.brand3.statusStr=="任意")
+                    this.brand3.status=null;
                 this.selectAll();
                     /*_this.selectAll();*/
                     /*_this.$message({
