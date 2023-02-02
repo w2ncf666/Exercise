@@ -12,12 +12,12 @@ public class MyBatisConfig {
     public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource){
         SqlSessionFactoryBean factoryBean=new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setTypeAliasesPackage("com.ecf.pojo");
+        factoryBean.setTypeAliasesPackage("com.wcf.pojo");
         return factoryBean;
     }
 
 
-    @Bean
+    @Bean/*代理把dao实现类包含进来了,所以spring不需要扫描dao*/
     public MapperScannerConfigurer mapperScannerConfigurer(){
         MapperScannerConfigurer msc=new MapperScannerConfigurer();
         msc.setBasePackage("com.wcf.dao");

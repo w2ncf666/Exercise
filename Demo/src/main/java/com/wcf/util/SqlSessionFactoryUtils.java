@@ -14,7 +14,7 @@ public class SqlSessionFactoryUtils {
     static {
         //静态代码块会随着类的加载而自动执行，且只执行一次
         try {
-            String resource = "mybatis-config.xml";
+            String resource = "mybatis-config.xml.abb";
             InputStream inputStream = Resources.getResourceAsStream(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         } catch (IOException e) {

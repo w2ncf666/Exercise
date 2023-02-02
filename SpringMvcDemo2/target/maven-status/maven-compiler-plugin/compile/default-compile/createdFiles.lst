@@ -1,4 +1,6 @@
+com\wcf\config\SpringMvcSupport.class
 com\wcf\pojo\SystemException.class
 com\wcf\pojo\Result.class
+com\wcf\pojo\ProjectInterceptor.class
 com\wcf\pojo\Code.class
 com\wcf\pojo\ProjectExceptionAdvice.class

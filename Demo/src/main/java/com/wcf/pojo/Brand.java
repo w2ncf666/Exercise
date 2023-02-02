@@ -66,7 +66,7 @@ public class Brand {
         return status == 0 ? "禁用":"启用";
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

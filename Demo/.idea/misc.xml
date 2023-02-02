@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/../../../BaiduNetdiskDownload/JavaWeb/day14-综合案例/代码/brand-case" />
     <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://$PROJECT_DIR$/../SpringMvcDemo3" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

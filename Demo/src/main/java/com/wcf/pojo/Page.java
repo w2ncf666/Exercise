@@ -15,6 +15,11 @@ public class Page<T>{
         this.totalCount = totalCount;
     }
 
+    public Page(Integer totalCount, List<T> list) {
+        this.totalCount = totalCount;
+        this.list = list;
+    }
+
     public List<T> getList() {
         return list;
     }

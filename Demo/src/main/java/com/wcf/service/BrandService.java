@@ -1,6 +1,8 @@
 package com.wcf.service;
 
 import com.wcf.pojo.Brand;
+import com.wcf.pojo.Page;
+import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
@@ -26,5 +28,5 @@ public interface BrandService {
     Integer selectTotalCount(Brand brand);
 
 
-    List<Brand> selectByPageAndCondition(int begin,int end,Brand brand);
+    Page<Brand> selectByPageAndCondition(int begin, int end, Brand brand);
 }
