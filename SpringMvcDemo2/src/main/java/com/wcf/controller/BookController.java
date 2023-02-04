@@ -37,6 +37,7 @@ public class BookController {
         try {
             int i=1/0;
         } catch (Exception e) {
+            System.out.println("zheli");
             throw new SystemException(Code.SYSTEM_ERR,"服务器超时");
         }
         return new Result(Code.DELETE_OK, "删除成功");

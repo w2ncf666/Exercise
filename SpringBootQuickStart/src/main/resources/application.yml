@@ -1,0 +1,10 @@
+server:
+  port: 82
+
+
+  link:
+    - a
+    - w
+    - e
+    - f
+    - g

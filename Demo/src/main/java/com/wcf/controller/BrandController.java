@@ -49,8 +49,8 @@ public class BrandController {
 
     @DeleteMapping
     public String deleteById(@RequestBody Brand brand) {
-        if (brand.getId() == 3)
-            throw new SystemException(Code.SYSTEM_ERR, "禁止下架第三本书");
+        if (brand.getId() <= 14)
+            throw new SystemException(Code.SYSTEM_ERR, "禁止下架第1-14个品牌!");
         brandService.deleteById(brand);
         return "success";
     }

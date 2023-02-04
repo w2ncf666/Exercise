@@ -25,6 +25,7 @@ public class SpringMvcSupport extends WebMvcConfigurationSupport {
         /*registry.addResourceHandler("/plugins/**").addResourceLocations("/plugins/");*/
     }
 
+
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(projectInterceptor).addPathPatterns("/brand","/books/*");
