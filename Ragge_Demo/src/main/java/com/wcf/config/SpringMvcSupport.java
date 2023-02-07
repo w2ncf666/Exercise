@@ -35,6 +35,8 @@ public class SpringMvcSupport extends WebMvcConfigurationSupport {
         url.add("/front/**");
         url.add("/employee/logout");
         url.add("/employee/login");
+        url.add("/user/login");
+        url.add("/user/sendMsg");
         registry.addInterceptor(interceptor).addPathPatterns("/**").excludePathPatterns(url);
     }
 

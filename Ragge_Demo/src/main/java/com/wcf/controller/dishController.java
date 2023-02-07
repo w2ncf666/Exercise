@@ -43,13 +43,27 @@ public class dishController {
 
 
     @GetMapping("/list")
-    public R<List<Dish>> selectForSetMeal(Long categoryId,String name){
-
+    public R<List<DishDto3>> selectForSetMeal(Dish dish){
+        Long categoryId = dish.getCategoryId();
+        String name = dish.getName();
+        Integer status = dish.getStatus();
         LambdaQueryWrapper<Dish>lqw=new LambdaQueryWrapper<>();
         lqw.eq(categoryId!=null,Dish::getCategoryId,categoryId);
+        lqw.eq(status!=null,Dish::getStatus,status);
         lqw.like(StringUtils.isNotEmpty(name),Dish::getName,name);
         List<Dish> dishes = mapper.selectList(lqw);
-        return R.success(dishes);
+        ArrayList<DishDto3> list = new ArrayList<>();
+        for (Dish item : dishes) {//每个item对应一个口味集合
+            DishDto3 dishDto3 = new DishDto3();
+            BeanUtils.copyProperties(item,dishDto3);
+            Long dishId = item.getId();
+            LambdaQueryWrapper<DishFlavor>lqw2=new LambdaQueryWrapper<>();
+            lqw2.eq(DishFlavor::getDishId,dishId);
+            List<DishFlavor> dishFlavors = dishFlavorMapper.selectList(lqw2);
+            dishDto3.setFlavors(dishFlavors);
+            list.add(dishDto3);
+        }
+        return R.success(list);
     }
 
 
@@ -102,10 +116,10 @@ public class dishController {
         log.info(name);
         Page<Dish> page1 = new Page<>(page, pageSize);
         Page<DishDto> page2=new Page<>();
-        BeanUtils.copyProperties(page1,page2,"records");
         LambdaQueryWrapper<Dish> lqw = new LambdaQueryWrapper<>();
         lqw.like(StringUtils.isNotEmpty(name), Dish::getName, name);
         mapper.selectPage(page1, lqw);
+        BeanUtils.copyProperties(page1,page2,"records");
         log.info("开始1__________________________________");
         log.info(page1.getRecords().toString());
         List<DishDto> list2=new ArrayList<>();
