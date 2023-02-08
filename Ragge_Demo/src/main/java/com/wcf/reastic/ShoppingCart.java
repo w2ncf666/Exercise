@@ -50,6 +50,20 @@ public class ShoppingCart implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
+    public ShoppingCart() {
+    }
+
+    public ShoppingCart(String name,String image,Long userId,Long dishId, Long setmealId, String dishFlavor, Integer number, BigDecimal amount) {
+        this.name=name;
+        this.image=image;
+        this.userId = userId;
+        this.dishId = dishId;
+        this.setmealId = setmealId;
+        this.dishFlavor = dishFlavor;
+        this.number = number;
+        this.amount = amount;
+    }
+
     @TableField(exist = false)
     private Long updateUser;
 

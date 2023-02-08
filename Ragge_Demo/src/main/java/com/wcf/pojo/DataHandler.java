@@ -2,6 +2,7 @@ package com.wcf.pojo;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.wcf.Util.BaseContextUtil;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;

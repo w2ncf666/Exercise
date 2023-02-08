@@ -46,6 +46,8 @@ public class addressController {
      */
     @PutMapping("default")
     public R<AddressBook> setDefault(@RequestBody AddressBook addressBook,HttpSession session) {
+        if(session.getAttribute("user")==null)
+            return R.error("请先登录!");
         log.info("addressBook:{}", addressBook);
         LambdaUpdateWrapper<AddressBook> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(AddressBook::getUserId, session.getAttribute("user"));
@@ -76,6 +78,8 @@ public class addressController {
      */
     @GetMapping("default")
     public R<AddressBook> getDefault(HttpSession session) {
+        if(session.getAttribute("user")==null)
+            return R.error("请先登录!");
         LambdaQueryWrapper<AddressBook> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(AddressBook::getUserId, session.getAttribute("user"));
         queryWrapper.eq(AddressBook::getIsDefault, 1);
@@ -94,6 +98,8 @@ public class addressController {
      */
     @GetMapping("/list")
     public R<List<AddressBook>> list(AddressBook addressBook, HttpSession session) {
+        if(session.getAttribute("user")==null)
+            return R.error("请先登录!");
         log.info("看看这里啊实打实:"+session.getAttribute("userPhone"));
         addressBook.setUserId((Long) session.getAttribute("user"));
         log.info("addressBook:{}", addressBook);
