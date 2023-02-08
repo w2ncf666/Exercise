@@ -21,6 +21,18 @@ public class addressController {
     @Autowired
     AddressMapper addressMapper;
 
+    @DeleteMapping
+    public R<String> delete(@RequestParam String ids){
+        addressMapper.deleteById(Long.parseLong(ids));
+        return R.success("删除成功");
+    }
+
+    @PutMapping
+    public R<AddressBook> edit(@RequestBody AddressBook addressBook){
+        addressMapper.updateById(addressBook);
+        return R.success(addressBook);
+    }
+
     @PostMapping
     public R<AddressBook> save(@RequestBody AddressBook addressBook,HttpSession session) {
         addressBook.setUserId((Long) session.getAttribute("user"));

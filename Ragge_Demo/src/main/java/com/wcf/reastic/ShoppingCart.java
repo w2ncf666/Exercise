@@ -3,6 +3,7 @@ package com.wcf.reastic;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -48,4 +49,10 @@ public class ShoppingCart implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    @TableField(exist = false)
+    private Long updateUser;
+
+    @TableField(exist = false)
+    private Long createUser;
 }

@@ -8,12 +8,10 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/shoppingCart")
@@ -22,6 +20,40 @@ public class shoppingCarController {
 
     @Autowired
     ShoppingCartMapper shoppingCartMapper;
+
+    @DeleteMapping("/clean")
+    public R<String> clean() {
+        shoppingCartMapper.delete(null);
+        return R.success("清空购物车成功");
+    }
+
+
+    @GetMapping("/list")
+    public R<List<ShoppingCart>> showGoods() {
+        List<ShoppingCart> shoppingCarts = shoppingCartMapper.selectList(null);
+        return R.success(shoppingCarts);
+    }
+
+
+    @PostMapping("/sub")
+    public R<ShoppingCart> sub(@RequestBody ShoppingCart shoppingCart) {
+        Long setmealId = shoppingCart.getSetmealId();
+        Long dishId = shoppingCart.getDishId();
+        LambdaQueryWrapper<ShoppingCart> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(dishId != null, ShoppingCart::getDishId, dishId)
+                .eq(setmealId != null, ShoppingCart::getSetmealId, setmealId);
+        ShoppingCart one = shoppingCartMapper.selectOne(lqw);
+        Integer number = one.getNumber();
+        if (number == 1) {
+            shoppingCartMapper.deleteById(one);
+            one.setNumber(0);
+        }
+        else {
+            one.setNumber(number - 1);
+            shoppingCartMapper.updateById(one);
+        }
+        return R.success(one);
+    }
 
 
     @PostMapping("/add")
@@ -38,21 +70,23 @@ public class shoppingCarController {
         lqw.eq(ShoppingCart::getImage, image).eq(ShoppingCart::getAmount, amount);*/
         Long setmealId = shoppingCart.getSetmealId();
         Long dishId = shoppingCart.getDishId();
+        String dishFlavor = shoppingCart.getDishFlavor();
         LambdaQueryWrapper<ShoppingCart> lqw = new LambdaQueryWrapper<>();
         lqw.eq(dishId != null, ShoppingCart::getDishId, dishId)
-                .eq(setmealId != null, ShoppingCart::getSetmealId, setmealId);
+                .eq(setmealId != null, ShoppingCart::getSetmealId, setmealId)
+                .eq(dishFlavor!=null,ShoppingCart::getDishFlavor,dishFlavor);
         ShoppingCart one = shoppingCartMapper.selectOne(lqw);
-        if(one==null) {
+        if (one == null) {
             Long userId = (Long) session.getAttribute("user");
             shoppingCart.setUserId(userId);
+            shoppingCart.setNumber(1);
             shoppingCartMapper.insert(shoppingCart);
             return R.success(shoppingCart);
-        }
-        else {
+        } else {
             Integer number = one.getNumber();
-            log.info("书香是{}",number);
-            one.setNumber(number+1);
-            log.info("1231223撒旦{}",one.getNumber());
+            log.info("书香是{}", number);
+            one.setNumber(number + 1);
+            log.info("1231223撒旦{}", one.getNumber());
             shoppingCartMapper.updateById(one);
             return R.success(one);
         }
