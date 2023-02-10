@@ -102,7 +102,7 @@ public class setMealController {
         Page<Setmeal> page1 = new Page<>(page, pageSize);
         Page<SetmealDto> page2 = new Page<>();
         LambdaQueryWrapper<Setmeal> lqw = new LambdaQueryWrapper<>();
-        lqw.like(StringUtils.isNotEmpty(name), Setmeal::getName, name);
+        lqw.like(StringUtils.isNotEmpty(name), Setmeal::getName, name).orderByAsc(Setmeal::getUpdateTime);
         setMealMapper.selectPage(page1, lqw);
         log.info("在这里之前");
         BeanUtils.copyProperties(page1, page2, "records");
@@ -155,7 +155,7 @@ public class setMealController {
         Integer status = setmeal.getStatus();
         LambdaQueryWrapper<Setmeal>lqw=new LambdaQueryWrapper<>();
         lqw.eq(Setmeal::getCategoryId,categoryId);
-        lqw.eq(Setmeal::getStatus,status);
+        lqw.eq(Setmeal::getStatus,status).orderByDesc(Setmeal::getUpdateTime);
         List<Setmeal> setmealList = setMealMapper.selectList(lqw);
         return R.success(setmealList);
     }

@@ -46,7 +46,7 @@ public class Interceptor implements HandlerInterceptor {
            response.getWriter().write(jsonString);
            return false;
        }
-        BaseContextUtil.setCurrentId(userId);//待会这里尝试设置用户共享字段
+        BaseContextUtil.setCurrentId(employeeId);//待会这里尝试设置用户共享字段
         return true;
         /*if(userId==null)//res.data.code === 0 && res.data.msg === 'NOTLOGIN'
         {//用户

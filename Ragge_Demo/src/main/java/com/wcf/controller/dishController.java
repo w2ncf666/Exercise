@@ -49,7 +49,7 @@ public class dishController {
         Integer status = dish.getStatus();
         LambdaQueryWrapper<Dish>lqw=new LambdaQueryWrapper<>();
         lqw.eq(categoryId!=null,Dish::getCategoryId,categoryId);
-        lqw.eq(status!=null,Dish::getStatus,status);
+        lqw.eq(status!=null,Dish::getStatus,status).orderByDesc(Dish::getUpdateTime);
         lqw.like(StringUtils.isNotEmpty(name),Dish::getName,name);
         List<Dish> dishes = mapper.selectList(lqw);
         ArrayList<DishDto3> list = new ArrayList<>();

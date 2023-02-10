@@ -25,7 +25,9 @@ public class SpringMvcSupport extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         //当访问/pages/????时候，从/pages目录下查找内容
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        //registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/backend/**").addResourceLocations("classpath:/static/backend/");
+        registry.addResourceHandler("/front/**").addResourceLocations("classpath:/static/front/");
     }
 
     @Override
